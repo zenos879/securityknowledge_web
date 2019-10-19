@@ -1,0 +1,18 @@
+<view class="category_container">
+  <view class="nav_left">
+    <block wx:for="{{cateItems}}" wx:key="index">
+      <view class="nav_left_items {{curNav == item.cate_id ? 'active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.cate_id}}">{{item.cate_name}}</view>
+    </block>
+  </view>
+  <view class="nav_right">
+    <view wx:if="{{cateItems[curIndex].ishaveChild}}">
+      <block wx:for="{{cateItems[curIndex].children}}" wx:key="curIndex">
+        <view class="nav_right_items" bindtap="gotoAbstract" data-catid='{{item.child_id}}' data-cname='{{item.name}}' data-cdesc='{{item.subTitle}}'>
+          <view class='title'>{{item.name}}</view>
+          <view class='subTitle'>{{item.subTitle}}</view>
+        </view>
+      </block>
+    </view>
+    <view class="nodata_text" wx:else>该分类暂无数据</view>
+  </view>
+</view>

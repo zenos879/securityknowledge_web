@@ -1,0 +1,9 @@
+<import src='article-item/article-item-template.wxml' />
+<view class='container'>
+  <view class='list_header'>
+    <view class='list_name'>{{catName}}</view>
+    <text class='list_cnt'>已收录{{art_cnt}}部</text>
+    <text class='list_desc'>{{catDesc}}</text>
+  </view>
+  <template is='article-list' data='{{listItems,collection_list}}' />
+</view>

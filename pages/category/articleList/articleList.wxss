@@ -1,0 +1,26 @@
+@import "article-item/article-item-template.wxss";
+
+.list_header {
+  background-color: #006699;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  line-height: 1.6;
+}
+
+.list_name {
+  font-size: 50rpx;
+}
+
+.list_cnt {
+  display: block;
+  font-size: 30rpx;
+}
+
+.list_desc {
+  display: block;
+  font-size: 35rpx;
+  padding-bottom: 20rpx;
+}
+

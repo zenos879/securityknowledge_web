@@ -1,0 +1,68 @@
+<import src='/pages/category/articleList/article-item/article-item-template.wxml' />
+<view>
+  <view class="home-container" wx:if="{{showHomePage}}">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}" wx:key="">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <view class='search'>
+      <icon type="search" class="search-img" size="13" color="#405f80"></icon>
+      <input type='text' placeholder='请输入法律法规名称或文号' confirm-type='search' value="{{inputValue}}" bindfocus="onBindFocus" bindconfirm="query" bindinput></input>
+      <image wx:if="{{showSearch}}" src="/pages/image/xx.png" class="xx-img" catchtap="onCancelImgTap"></image>
+    </view>
+
+    <view class="zan-cell" style="margin:0px;padding:12px 0px;">
+      <view class="zan-cell__bd">
+        <view class="icon-wrap">
+          <view bindtap="goToCategory" data-catid='5' data-cname='国家法律'>
+            <image src="/pages/image/law.png" class="iconstyle"></image>
+            <view class="smallsize">国家法律</view>
+          </view>
+        </view>
+        <view class="icon-wrap">
+          <view bindtap="goToCategory" data-catid='9' data-cname='行政法规'>
+            <image src="/pages/image/regulations.png" class="iconstyle"></image>
+            <view class="smallsize">行政法规</view>
+          </view>
+        </view>
+        <view class="icon-wrap">
+          <navigator url='collect/collect'>
+            <image src="/pages/image/collect.png" class="iconstyle"></image>
+            <view class="smallsize">我的收藏</view>
+          </navigator>
+        </view>
+        <view class="icon-wrap">
+          <navigator url='history/history'>
+            <image src="/pages/image/new.png" class="iconstyle"></image>
+            <view class="smallsize">我看过的</view>
+          </navigator>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="update">最新发布</view>
+
+    <view class='list_content'>
+      <block wx:for="{{listItems}}" wx:key="curIndex">
+        <view bindtap="gotoArticle" data-artid="{{item.art_id}}">
+          <view class='list_art'>{{item.art_title}}</view>
+        </view>
+      </block>
+    </view>
+
+  </view>
+
+  <view class="search-container" wx:if="{{showSearch}}">
+    <view class='search'>
+      <icon type="search" class="search-img" size="13" color="#405f80"></icon>
+      <input type='text' placeholder='请输入法律法规名称或文号' confirm-type='search' value="{{inputValue}}" bindfocus="onBindFocus" bindconfirm="query" bindinput='inputBind'></input>
+      <image wx:if="{{showSearch}}" src="../image/xx.png" class="xx-img" catchtap="onCancelImgTap"></image>
+    </view>
+    <template is='article-list' data='{{listItems,collection_list}}' />
+  </view>
+</view>

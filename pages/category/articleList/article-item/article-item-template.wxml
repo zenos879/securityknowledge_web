@@ -1,0 +1,13 @@
+<template name='article-list'>
+  <view class='list_content'>
+    <block wx:for="{{listItems}}" wx:key="curIndex">
+      <view class='list_art_container'>
+        <view class='list_art' bindtap="gotoArticle" data-artid="{{item.art_id}}">{{item.art_title}}</view>
+        <image wx:if='{{collection_list[item.art_id]}}' class='list_collect' bindtap='onCollect' data-artid="{{item.art_id}}" src='/pages/image/collected.png'></image>
+        <image wx:else class='list_collect' bindtap='onCollect' data-list="{{collection_list}}" data-artid="{{item.art_id}}" src='/pages/image/collected-anti.png'></image>
+      </view>
+    </block>
+  </view>
+
+
+</template>

@@ -1,0 +1,7 @@
+<view class='container'>
+  <view class='art_head'>
+    <view class='art_name'>{{art_title}}</view>
+  </view>
+  <view class='art_cnt'>
+  </view>
+</view>
