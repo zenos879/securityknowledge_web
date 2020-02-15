@@ -1,5 +1,5 @@
 <template name="loginTip">
-  <view wx:if="{{isLogin}}" class="login_wrapper">
+  <view wx:if="{{notLogin}}" class="login_wrapper">
     <view class="login_container">
       <view class="login_info">
         <image class="login_img" src='/image/logo.png' round></image>

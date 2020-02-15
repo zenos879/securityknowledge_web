@@ -21,137 +21,25 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     hideInput: false,
     hotItems: [],
-    isLogin: true,
+    notLogin: false,
     notvip: false
   },
 
-  //获得用户信息
-  getSetting: function() {
-    var that = this;
-    wx.getSetting({
-      success: function(res) {
-        if (res.authSetting['scope.userInfo']) {
-          that.setData({
-            isLogin: false
-          });
-          api.showLoading("正在加载...");
-          that.getUserInfo(res);
-        } else {
-          that.setData({
-            isLogin: true
-          });
-        }
-      }
-    });
-  },
-
-  //获得用户信息
-  getUserInfo: function(e) {
-    var that = this;
-    wx.getUserInfo({
-      success: function(res) {
-        var userInfo = res.userInfo;
-        wx.setStorageSync("userInfo", userInfo);
-        var openId = wx.getStorageSync("openId");
-        if (openId == null || openId.length == 0) {
-          that.showTopToast("点击 ··· 添加到我的小程序"); //显示右上角的添加收藏提示框
-          that.getUserOpenId(that.onOpenIdComplete, openId, userInfo);
-        } else {
-          that.onOpenIdComplete(openId, userInfo);
-        }
-      }
-    });
-  },
-
-  //获得用户openId
-  getUserOpenId: function(callback, openId, userInfo) {
-    var that = this;
-    wx.login({
-      success: res => {
-        var url = api.api_list.get_open_id + "?code=" + res.code;
-        wx.request({
-          url: url,
-          success: res => {
-            callback && callback(res.data.openid, userInfo);
-          }
-        });
-      }
-    });
-  },
-
-  //openid 获取之后，注册加载首页
-  onOpenIdComplete: function(openId, userInfo) {
-    wx.setStorageSync("openId", openId);
-    wx.setStorageSync("userInfo", userInfo);
-    this.loadHomePageData();
-  },
-
-  //注册，更新用户数据
-  register: function() {
-    var openId = wx.getStorageSync("openId");
-    var userInfo = wx.getStorageSync("userInfo");
-    // utils.register(openId, userInfo); //与服务端通信，更新用户数据
-    var tmp = JSON.stringify(userInfo)
-    wx.request({
-      url: api.api_list.register + "?openId=" + openId + "&nickName=" + userInfo.nickName + "&avatarUrl=" + userInfo.avatarUrl,
-      method: 'GET',
-      success: function(res) {
-        //将收藏和历史的数据，写入缓存，后面直接用即可。
-        //后面再setStorageSync的时候，要同时更新服务端数据。
-        if (res.data != null) {
-          // var collectionList = res.data.collections.split(",");
-          // var historyList = res.data.histories;
-          var collectionList = res.data[0].collections;
-          var historyList = res.data[0].histories;
-          wx.setStorageSync("collection_list", collectionList);
-          wx.setStorageSync("history_list", historyList);
-        }
-      }
-    })
-  },
-
-
-  //获取用户数据
-  bindGetUserInfo: function(e) {
-    if (e.detail.userInfo) {
-      var that = this;
-      that.getSetting();
-      that.setData({
-        isLogin: false
-      });
-    } else {
-      wx.showModal({
-        title: '警告',
-        content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
-        showCancel: false,
-        confirmText: '返回授权',
-        success: function(res) {
-          // 用户没有授权成功，不需要改变 isLogin 的值
-          if (res.confirm) {
-            console.log('用户点击了“返回授权”');
-          }
-        }
-      });
-    }
-  },
-
-  showTopToast: function(str) {
-    var _this = this;
-    _this.setData({
-      isShow: true,
-      txt: str
-    });
-    setTimeout(function() { //toast消失
-      _this.setData({
-        isShow: false
-      });
-    }, 5000);
-  },
+  // showTopToast: function(str) {
+  //   var _this = this;
+  //   _this.setData({
+  //     isShow: true,
+  //     txt: str
+  //   });
+  //   setTimeout(function() { //toast消失
+  //     _this.setData({
+  //       isShow: false
+  //     });
+  //   }, 5000);
+  // },
 
   //加载首页数据
   loadHomePageData: function() {
-    var self = this;
-
     //获取热门标签
     var url = api.api_list.get_hot_tag;
     api.http(url, this.loadHottag);
@@ -166,27 +54,24 @@ Page({
       url = api.api_list.get_total_articles;
       api.http(url, this.loadTotalArtNo);
     } else {
-      self.setData({
+      this.setData({
         total_articles: total_articles
       })
     };
 
     //获取 '首页的轮播图'
     url = api.api_list.get_home_img;
-
     api.http(url, this.loadSwiperImg);
 
     //取消加载框
     api.hideLoading();
-    self.register();
   },
 
+  //加载轮播图
   loadSwiperImg: function(res) {
-    var self = this;
-   
-    var now=new Date().getTime(); 
+    var now = new Date().getTime();
     var tmp = [res.img1 + "?ts=" + now, res.img2 + "?ts=" + now, res.img3 + "?ts=" + now];
-    self.setData({
+    this.setData({
       imgUrls: tmp
     })
   },
@@ -222,6 +107,7 @@ Page({
   //初始化
   init: function() {
     // this.getSetting();
+    this.loadHomePageData();
   },
 
   onLoad: function(options) {
@@ -231,24 +117,62 @@ Page({
   //打开页面
   openPage: function(a) {
     var that = this;
-    api.openPage(a, function(notvip) {
-      if (notvip) {//无vip权限
+    var fileurl = a.currentTarget.dataset.url;
+    var artid = a.currentTarget.dataset.artid;
+    var artpath = a.currentTarget.dataset.artpath;
+
+    wx.setStorageSync("fileurl", fileurl);
+    wx.setStorageSync("artid", artid);
+    wx.setStorageSync("artpath", artpath);
+
+    //首先，看用户是否登录.如果没有没登录，拉起面板，让登录。
+    var openId = wx.getStorageSync("openId");
+    console.log(openId);
+    if (openId == null || openId.length == 0) {
+      this.setData({
+        notLogin: true
+      })
+    } else {
+      this.ifVip();
+    }
+  },
+
+  //获取用户数据
+  bindGetUserInfo: function(e) {
+    console.log("=======lalalal=====");
+    var that = this;
+    api.bindGetUserInfo(e, function(notLogin) {
+      that.setData({
+        notLogin: notLogin
+      })
+      that.ifVip();
+    });
+  },
+
+  //判断是否有权限
+  ifVip: function() {
+    var that = this;
+    var openId = wx.getStorageSync("openId");
+    var getVipleftday = api.api_list.get_vipperiod + "?openId=" + openId;
+    console.log(getVipleftday);
+    api.http(getVipleftday, function(res) {
+      console.log("权限时间: " + res);
+      if (res == 0) { //无权限
         that.setData({
-          notvip: notvip
+          notvip: true
         })
-        setTimeout(function () { 
+        setTimeout(function() {
           var openId = wx.getStorageSync("openId");
-          api.updateVIPperiod(openId);//然后更新vip权限
+          api.updateVIPperiod(openId); //然后更新vip权限
           that.setData({ //最后收起分享对话框
             notvip: false
           });
+          api.openPage(that.data.notLogin, that.data.notvip);
         }, 10000);
-        api.openPage(a, function(){});
+      } else {
+        api.openPage(that.data.notLogin, that.data.notvip);
       }
     });
-
-   
-
   },
 
   openNewPage: function(a) {

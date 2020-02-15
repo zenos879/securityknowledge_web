@@ -92,34 +92,32 @@ function openNewPage(a) {
     url: e
   });
 }
+
 //打开页面
-function openPage(a, recall) {
-  var e = a.currentTarget.dataset.url;
-  var artid = a.currentTarget.dataset.artid;
-  // openArticle(artid); //需要换回普通的打开方式时，此句后后面的切换即可。
-  var artpath = a.currentTarget.dataset.artpath;
-  var lastName = artpath.substring(artpath.indexOf(".") + 1, artpath.length);
-  //获得vip所剩时间，如果小于等于0，则分享授权，否则继续
-  var openId = wx.getStorageSync("openId");
-  var getVipleftday = api_list.get_vipperiod + "?openId=" + openId;
-  http(getVipleftday, function(res) {
-    if (res != 0) { //有权限
-      if (lastName == "pdf" || lastName == "PDF") {
-        wx.setStorageSync('artid', artid);
-        wx.setStorageSync('artpath', artpath);
-        updateAriticleViewtimes(artid);
-        updateUserViewHistory(artid);
-        wx.navigateTo({
-          url: e
-        });
-      } else {
-        openArticle(artpath, artid);
-      }
+function openPage(notLogin, notVip) {
+  // var notLogin = wx.getStorageSync("notLogin");
+  // var notVip = wx.getStorageSync("notVip");
+  var fileurl = wx.getStorageSync("fileurl");
+  var artid = wx.getStorageSync("artid");
+  var artpath = wx.getStorageSync("artpath");
+  if (notLogin != "undefined" && notVip != "undefined" && !notLogin && !notVip) {
+    // var fileurl = a.currentTarget.dataset.url;
+    // var artid = a.currentTarget.dataset.artid;
+    // var artpath = a.currentTarget.dataset.artpath;
+    // openArticle(artid); //需要换回普通的打开方式时，此句后后面的切换即可。
+    var lastName = artpath.substring(artpath.indexOf(".") + 1, artpath.length);
+    if (lastName == "pdf" || lastName == "PDF") {
+      wx.setStorageSync('artid', artid);
+      wx.setStorageSync('artpath', artpath);
+      updateAriticleViewtimes(artid);
+      updateUserViewHistory(artid);
+      wx.navigateTo({
+        url: fileurl
+      });
     } else {
-      //提示分享才可见原文
-      recall(true);
+      openArticle(artpath, artid);
     }
-  });
+  }
 }
 
 //显示loading
@@ -190,7 +188,7 @@ function openArticle(file_url, artid) {
   }
 }
 
- 
+
 //更新文章的浏览次数
 function updateAriticleViewtimes(artid) {
   var url = api_list.updateAriticleViewtimes + "?artId=" + artid;
@@ -232,6 +230,103 @@ function updateUserView(historyList) {
   var url = api_list.updateUserViewHistory + "?openId=" + openId + "&historyList=" + historyList;
   http(url, function() {});
 }
+/*********************用户登录 の 相关方法******************* */
+//响应登录对话框中的事件
+function bindGetUserInfo(e, callback) {
+  if (e.detail.userInfo) {
+    getSetting(callback);
+  } else {
+    wx.showModal({
+      title: '警告',
+      content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
+      showCancel: false,
+      confirmText: '返回授权',
+      success: function(res) {
+        // 用户没有授权成功，不需要改变 isLogin 的值
+        if (res.confirm) {
+          console.log('用户点击了“返回授权”');
+        }
+      }
+    });
+  }
+}
+
+//获得用户信息
+function getSetting(callback) {
+  wx.getSetting({
+    success: function(res) {
+      if (res.authSetting['scope.userInfo']) {
+        callback(false);
+        // that.setData({
+        //   isLogin: false
+        // });
+        getUserInfo(res);
+      } else {
+        that.setData({
+          isLogin: true
+        });
+      }
+    }
+  });
+}
+
+
+//获得用户信息
+function getUserInfo(e) {
+  wx.getUserInfo({
+    success: function(res) {
+      var userInfo = res.userInfo;
+      wx.setStorageSync("userInfo", userInfo);
+      var openId = wx.getStorageSync("openId");
+      if (openId == null || openId.length == 0) {
+        // showTopToast("点击 ··· 添加到我的小程序"); //显示右上角的添加收藏提示框
+        getUserOpenId(onOpenIdComplete, openId, userInfo);
+      } else {
+        onOpenIdComplete(openId, userInfo);
+      }
+    }
+  });
+}
+
+//获得用户openId
+function getUserOpenId(callback, openId, userInfo) {
+  var that = this;
+  wx.login({
+    success: res => {
+      var url = api_list.get_open_id + "?code=" + res.code;
+      wx.request({
+        url: url,
+        success: res => {
+          callback && callback(res.data.openid, userInfo);
+        }
+      });
+    }
+  });
+}
+
+
+//openid 获取之后，注册加载首页
+function onOpenIdComplete(openId, userInfo) {
+  wx.setStorageSync("openId", openId);
+  wx.setStorageSync("userInfo", userInfo);
+  var tmp = JSON.stringify(userInfo)
+  wx.request({
+    url: api_list.register + "?openId=" + openId + "&nickName=" + userInfo.nickName + "&avatarUrl=" + userInfo.avatarUrl,
+    method: 'GET',
+    success: function(res) {
+      //将收藏和历史的数据，写入缓存，后面直接用即可。
+      //后面再setStorageSync的时候，要同时更新服务端数据。
+      if (res.data != null) {
+        // var collectionList = res.data.collections.split(",");
+        // var historyList = res.data.histories;
+        var collectionList = res.data[0].collections;
+        var historyList = res.data[0].histories;
+        wx.setStorageSync("collection_list", collectionList);
+        wx.setStorageSync("history_list", historyList);
+      }
+    }
+  })
+}
 
 module.exports = {
   api_list: api_list,
@@ -245,5 +340,7 @@ module.exports = {
   convertCollectListToListItmes: convertCollectListToListItmes,
   openArticle: openArticle,
   openNewPage: openNewPage,
-  updateVIPperiod: updateVIPperiod
+  updateVIPperiod: updateVIPperiod,
+  getSetting: getSetting,
+  bindGetUserInfo: bindGetUserInfo
 }

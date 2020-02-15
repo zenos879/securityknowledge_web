@@ -7,7 +7,7 @@
   <!-- 显示右上角的添加收藏提示框-->
   <template is="toast" data="{{txt,isShow}}"></template>
   <template is="shareTip" data="{{notvip}}"></template>
-  <template is="loginTip" data="{{isLogin}}"></template>
+  <template is="loginTip" data="{{notLogin}}"></template>
   <!--头部，搜索，以及4个分类-->
   <view class="home-part1">
     <!-- 头部的滚动图片-->
