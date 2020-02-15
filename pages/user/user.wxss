@@ -1,0 +1,132 @@
+page {
+  padding-bottom: 50rpx;
+  background: #f8f8f8;
+}
+
+text {
+  color: #666;
+}
+
+.header {
+  /* position: fixed;
+  top: 0;
+  left: 0; */
+  padding: 0 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  background: linear-gradient(#008792, #f0f0f4);
+  /* position: relative; */
+  height: 90px;
+  z-index: 99;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+}
+
+.user_desc {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  padding-left: 20px;
+}
+
+.avatar {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+}
+
+.user_name {
+  font-weight: bold;
+  color: #fff;
+}
+
+.vip_period {
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.nav {
+  margin-top: -10px;
+  font-size: 30px;
+  background: #f8f8f8;
+}
+
+.nav_part {
+  background: white;
+  margin-top: 10px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 15px 0;
+}
+
+.left_nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tubiao, .more {
+  margin: 0 10px;
+  width: 13px;
+  height: 13px;
+}
+
+.nav_btm {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.bottom-but {
+  width: 100px;
+  height: 35px;
+  /* border-radius: 25px; */
+  font-size: 14px;
+  color: #666;
+  background-color: white;
+  margin-left: 20px;
+  border-color: #999;
+}
+
+.domainNote {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #bfbfbf;
+  font-size: 20px;
+  padding: 30px 0px;
+}
+
+.domainNote image {
+  width: 13px;
+  height: 13px;
+}
+
+.domainNote text {
+  margin: 0 5px;
+  font-size: 12px;
+  color: #999;
+}

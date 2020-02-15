@@ -1,0 +1,6 @@
+.noContent{
+  padding: 10px 10px;
+}
+.list_content{
+  margin-top:0px;
+}

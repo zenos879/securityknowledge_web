@@ -1,0 +1,3 @@
+<view class='contactus'>
+  <view class='single_about'>{{contactus}}</view>
+</view>

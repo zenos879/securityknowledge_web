@@ -1,0 +1,8 @@
+<view>
+
+  <view class='aboutus'>
+    <block wx:for="{{aboutus}}" wx:for-index="idx" wx:key="curIndex">
+      <view class='single_about'>{{item}}</view>
+    </block>
+  </view>
+</view>

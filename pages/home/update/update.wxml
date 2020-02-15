@@ -1,0 +1,8 @@
+<import src='../../category/articleList/article-item/article-item-template.wxml' />
+<import src="/pages/share/share.wxml" />
+<view>
+  <view class='collect_content'>
+    <template is='article-list' data='{{listItems,collection_list}}' />
+  </view>
+  <template is="shareTip" data="{{notvip}}"></template>
+</view>

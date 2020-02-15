@@ -1,0 +1,5 @@
+@import "/pages/category/articleList/article-item/article-item-template.wxss";
+@import "/pages/share/share.wxss";
+.list_content{
+  margin-top:0px;
+}

@@ -1,0 +1,11 @@
+<import src='article-item/article-item-template.wxml' />
+<import src="/pages/share/share.wxml" />
+<view class='container'>
+  <!-- <view class='list_header'>
+    <view class='list_name'>{{catName}}</view>
+    <text class='list_cnt'>已收录{{art_cnt}}部</text>
+  </view> -->
+
+  <template is='article-list' data='{{listItems,collection_list}}' />
+   <template is="shareTip" data="{{notvip}}"></template>
+</view>

@@ -1,0 +1,12 @@
+.aboutus {
+  padding:10px 10px;
+  margin: 10px;
+}
+
+.single_about {
+  text-indent: 25px;
+  line-height: 30px;
+  color: #666;
+  letter-spacing: 2px;
+  font-size:14px;
+}

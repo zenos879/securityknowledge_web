@@ -1,0 +1,30 @@
+.toast-out {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  z-index: 2;
+  width: 180;
+  height: 45;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toast-in {
+  position: fixed;
+  top: 3px;
+  right: 10px;
+  z-index: 9999;
+  width: 180px;
+  height: 45px;
+  background: #6e707c;
+  opacity: 0.9;
+  text-align: center;
+  color: #f6f9ff;
+  border-radius: 4px;
+}
+
+.toast-txt {
+  font-size: 13px;
+  line-height: 45px;
+}
