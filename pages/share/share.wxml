@@ -2,7 +2,7 @@
   <view wx:if="{{notvip}}" class="vip_wrapper">
     <view class="vip_container">
       <view class="vip_info">
-        <image class="vip_img" src='/image/logo.png' round></image>
+        <image class="vip_img" src='/image/share_logo.png' round></image>
         <view class='vip_subtitle'> 您的VIP权限已经到期</view>
         <view class="vip_title">点击分享，增加10天VIP权限</view>
       </view>

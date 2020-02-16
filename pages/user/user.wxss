@@ -52,7 +52,9 @@ text {
   font-weight: bold;
   color: #fff;
 }
-
+.login_btn{
+  width:140px;
+}
 .nav {
   margin-top: -10px;
   font-size: 30px;
