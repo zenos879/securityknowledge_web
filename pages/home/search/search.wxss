@@ -1,5 +1,7 @@
 @import "../../category/articleList/article-item/article-item-template.wxss";
 @import "/pages/share/share.wxss";
+@import "/pages/login/login.wxss";
+
 .search-fixed {
   display: flex;
   flex-direction: column;

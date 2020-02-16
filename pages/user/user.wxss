@@ -1,3 +1,5 @@
+@import "/pages/share/share.wxss";
+@import "/pages/login/login.wxss";
 page {
   padding-bottom: 50rpx;
   background: #f8f8f8;

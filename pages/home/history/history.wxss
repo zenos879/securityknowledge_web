@@ -1,5 +1,6 @@
 @import "/pages/category/articleList/article-item/article-item-template.wxss";
 @import "/pages/share/share.wxss";
+@import "/pages/login/login.wxss";
 .noContent{
   padding: 10px 10px;
 }

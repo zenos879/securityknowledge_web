@@ -120,58 +120,37 @@ Page({
     var fileurl = a.currentTarget.dataset.url;
     var artid = a.currentTarget.dataset.artid;
     var artpath = a.currentTarget.dataset.artpath;
-
     wx.setStorageSync("fileurl", fileurl);
     wx.setStorageSync("artid", artid);
     wx.setStorageSync("artpath", artpath);
 
     //首先，看用户是否登录.如果没有没登录，拉起面板，让登录。
     var openId = wx.getStorageSync("openId");
-    console.log(openId);
     if (openId == null || openId.length == 0) {
       this.setData({
         notLogin: true
       })
-    } else {
-      this.ifVip();
+    } else {//然后看是否vip
+      api.ifVip(function (notvip) {
+        that.setData({
+          notvip: notvip
+        })
+      });
     }
   },
 
   //获取用户数据
   bindGetUserInfo: function(e) {
-    console.log("=======lalalal=====");
     var that = this;
     api.bindGetUserInfo(e, function(notLogin) {
       that.setData({
         notLogin: notLogin
       })
-      that.ifVip();
-    });
-  },
-
-  //判断是否有权限
-  ifVip: function() {
-    var that = this;
-    var openId = wx.getStorageSync("openId");
-    var getVipleftday = api.api_list.get_vipperiod + "?openId=" + openId;
-    console.log(getVipleftday);
-    api.http(getVipleftday, function(res) {
-      console.log("权限时间: " + res);
-      if (res == 0) { //无权限
+      api.ifVip(function(notvip) {
         that.setData({
-          notvip: true
+          notvip: notvip
         })
-        setTimeout(function() {
-          var openId = wx.getStorageSync("openId");
-          api.updateVIPperiod(openId); //然后更新vip权限
-          that.setData({ //最后收起分享对话框
-            notvip: false
-          });
-          api.openPage(that.data.notLogin, that.data.notvip);
-        }, 10000);
-      } else {
-        api.openPage(that.data.notLogin, that.data.notvip);
-      }
+      });
     });
   },
 

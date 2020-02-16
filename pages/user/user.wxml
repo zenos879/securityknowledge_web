@@ -1,12 +1,20 @@
+<import src="/pages/login/login.wxml" />
+<import src="/pages/share/share.wxml" />
+<template is="shareTip" data="{{notvip}}"></template>
+<template is="loginTip" data="{{notLogin}}"></template>
 <view class="header">
   <view class="user">
     <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+
     <view class="user_desc">
-      <text class="user_name">{{userInfo.nickName}}</text>
-      <view class="vip_period">VIP 可用{{vipPeriod}}天</view>
+      <view wx:if="{{!visiter}}">
+        <text class="user_name">{{userInfo.nickName}}</text>
+        <view class="vip_period">VIP 可用{{vipPeriod}}天</view>
+      </view>
+      <view wx:else>
+        <button class="login_btn" bindtap="loginTap">请登录</button>
+      </view>
     </view>
-
-
   </view>
 </view>
 <!-- 功能列表 -->

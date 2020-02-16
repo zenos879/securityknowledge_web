@@ -236,19 +236,24 @@ function bindGetUserInfo(e, callback) {
   if (e.detail.userInfo) {
     getSetting(callback);
   } else {
-    wx.showModal({
-      title: '警告',
-      content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
-      showCancel: false,
-      confirmText: '返回授权',
-      success: function(res) {
-        // 用户没有授权成功，不需要改变 isLogin 的值
-        if (res.confirm) {
-          console.log('用户点击了“返回授权”');
-        }
-      }
-    });
+    showMustLoginTip();
   }
+}
+
+//一定要授权提示框
+function showMustLoginTip() {
+  wx.showModal({
+    title: '警告',
+    content: '您点击了拒绝授权，将无法进入小程序，请授权之后再进入!!!',
+    showCancel: false,
+    confirmText: '返回授权',
+    success: function(res) {
+      // 用户没有授权成功，不需要改变 isLogin 的值
+      if (res.confirm) {
+        console.log('用户点击了“返回授权”');
+      }
+    }
+  });
 }
 
 //获得用户信息
@@ -256,11 +261,7 @@ function getSetting(callback) {
   wx.getSetting({
     success: function(res) {
       if (res.authSetting['scope.userInfo']) {
-        callback(false);
-        // that.setData({
-        //   isLogin: false
-        // });
-        getUserInfo(res);
+        getUserInfo(res, callback);
       } else {
         that.setData({
           isLogin: true
@@ -271,8 +272,8 @@ function getSetting(callback) {
 }
 
 
-//获得用户信息
-function getUserInfo(e) {
+//获得openid信息
+function getUserInfo(e, callback) {
   wx.getUserInfo({
     success: function(res) {
       var userInfo = res.userInfo;
@@ -280,7 +281,18 @@ function getUserInfo(e) {
       var openId = wx.getStorageSync("openId");
       if (openId == null || openId.length == 0) {
         // showTopToast("点击 ··· 添加到我的小程序"); //显示右上角的添加收藏提示框
-        getUserOpenId(onOpenIdComplete, openId, userInfo);
+        wx.login({ // 获得用户的Openid
+          success: res => {
+            var url = api_list.get_open_id + "?code=" + res.code;
+            wx.request({
+              url: url,
+              success: res => {
+                onOpenIdComplete(res.data.openid, userInfo);
+                callback(false);
+              }
+            });
+          }
+        });
       } else {
         onOpenIdComplete(openId, userInfo);
       }
@@ -288,24 +300,9 @@ function getUserInfo(e) {
   });
 }
 
-//获得用户openId
-function getUserOpenId(callback, openId, userInfo) {
-  var that = this;
-  wx.login({
-    success: res => {
-      var url = api_list.get_open_id + "?code=" + res.code;
-      wx.request({
-        url: url,
-        success: res => {
-          callback && callback(res.data.openid, userInfo);
-        }
-      });
-    }
-  });
-}
 
 
-//openid 获取之后，注册加载首页
+//openid 获取之后，获取用户收藏和历史的数据
 function onOpenIdComplete(openId, userInfo) {
   wx.setStorageSync("openId", openId);
   wx.setStorageSync("userInfo", userInfo);
@@ -317,8 +314,6 @@ function onOpenIdComplete(openId, userInfo) {
       //将收藏和历史的数据，写入缓存，后面直接用即可。
       //后面再setStorageSync的时候，要同时更新服务端数据。
       if (res.data != null) {
-        // var collectionList = res.data.collections.split(",");
-        // var historyList = res.data.histories;
         var collectionList = res.data[0].collections;
         var historyList = res.data[0].histories;
         wx.setStorageSync("collection_list", collectionList);
@@ -326,6 +321,28 @@ function onOpenIdComplete(openId, userInfo) {
       }
     }
   })
+}
+
+//判断是否有权限
+function ifVip(callback) {
+  var openId = wx.getStorageSync("openId");
+  var getVipleftday = api_list.get_vipperiod + "?openId=" + openId;
+  http(getVipleftday, function(res) {
+    if (res == 0) { //无权限
+      // that.setData({
+      //   notvip: true
+      // })
+      callback(true);
+      setTimeout(function() {
+        var openId = wx.getStorageSync("openId");
+        updateVIPperiod(openId); //然后更新vip权限
+        callback(false);
+        openPage(false, false);
+      }, 10000);
+    } else {
+      openPage(false,false);
+    }
+  });
 }
 
 module.exports = {
@@ -342,5 +359,6 @@ module.exports = {
   openNewPage: openNewPage,
   updateVIPperiod: updateVIPperiod,
   getSetting: getSetting,
-  bindGetUserInfo: bindGetUserInfo
+  bindGetUserInfo: bindGetUserInfo,
+  ifVip:ifVip
 }

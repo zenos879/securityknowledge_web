@@ -10,6 +10,7 @@ Page({
     collection_list: '',
     totalCount: 0,
     count: 20,
+    notLogin: false,
     notvip: false
   },
 
@@ -65,20 +66,40 @@ Page({
   //打开页面
   openPage: function (a) {
     var that = this;
-    api.openPage(a, function (notvip) {
-      if (notvip) {//无vip权限
+    var fileurl = a.currentTarget.dataset.url;
+    var artid = a.currentTarget.dataset.artid;
+    var artpath = a.currentTarget.dataset.artpath;
+    wx.setStorageSync("fileurl", fileurl);
+    wx.setStorageSync("artid", artid);
+    wx.setStorageSync("artpath", artpath);
+
+    //首先，看用户是否登录.如果没有没登录，拉起面板，让登录。
+    var openId = wx.getStorageSync("openId");
+    if (openId == null || openId.length == 0) {
+      this.setData({
+        notLogin: true
+      })
+    } else {//然后看是否vip
+      api.ifVip(function (notvip) {
         that.setData({
           notvip: notvip
         })
-        setTimeout(function () {
-          var openId = wx.getStorageSync("openId");
-          api.updateVIPperiod(openId);//然后更新vip权限
-          that.setData({ //最后收起分享对话框
-            notvip: false
-          });
-        }, 3000);
-        api.openPage(a, function () { });
-      }
+      });
+    }
+  },
+
+  //获取用户数据
+  bindGetUserInfo: function (e) {
+    var that = this;
+    api.bindGetUserInfo(e, function (notLogin) {
+      that.setData({
+        notLogin: notLogin
+      })
+      api.ifVip(function (notvip) {
+        that.setData({
+          notvip: notvip
+        })
+      });
     });
   },
 

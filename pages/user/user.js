@@ -2,23 +2,39 @@ var api = require('../data/data.js');
 var app = getApp();
 Page({
   data: {
-    defaultAvatarUrl: "/image/main/default_avatar.png",
-    defaultNickName: "用户名称",
+    defaultAvatarUrl: "/image/default_avatar.png",
+    defaultNickName: "请登录",
     art_list: [],
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     isHide: false,
     appid: 'wx9774987d567fd009',
     secret: '5b51058483d44f7ea4050e2de7783154',
     navHeight: 0,
-    vipPeriod: 0
+    vipPeriod: 0,
+    visiter: true,
+    notLogin: false,
+    notvip: false
   },
 
   onLoad: function(options) {
     var that = this;
     var userInfo = wx.getStorageSync("userInfo");
-    this.setData({
-      userInfo: userInfo,
-    });
+    console.log(userInfo);
+    if (userInfo && userInfo != null) { //已经登陆的状态
+      that.setData({
+        visiter: false,
+        userInfo: userInfo
+      })
+      that.getVIPperiod();
+    } else { //未登陆的状态，设置默认头像
+      var userInfo = {};
+      userInfo.avatarUrl = that.data.defaultAvatarUrl;
+      this.setData({
+        userInfo: userInfo,
+      });
+    }
+
+    //设置样式
     wx.getSystemInfo({
       success: function(res) {
         var clientHeight = res.windowHeight;
@@ -31,18 +47,32 @@ Page({
         });
       }
     });
-    that.getVIPperiod();
   },
 
-  getVIPperiod: function() {
-    var openId = wx.getStorageSync("openId");
-    var that = this;
-    var getVipleftday = api.api_list.get_vipperiod + "?openId=" + openId;
-    api.http(getVipleftday, function (res) {
-      that.setData({
-        vipPeriod: res
-      })
+  loginTap: function() {
+    this.setData({
+      notLogin: true
     })
+  },
+
+
+
+  //获得vip期限
+  getVIPperiod: function() {
+    var that = this;
+    var openId = wx.getStorageSync("openId");
+    if (openId != null && openId != '') {
+      var getVipleftday = api.api_list.get_vipperiod + "?openId=" + openId;
+      api.http(getVipleftday, function(res) {
+        that.setData({
+          vipPeriod: res
+        })
+      })
+    } else {
+      that.setData({
+        vipPeriod: 0
+      })
+    }
   },
 
   setVIPperiod: function(openId) {
@@ -56,6 +86,7 @@ Page({
     });
   },
 
+  //给我点赞
   encourageMe: function() {
     wx.navigateToMiniProgram({
       appId: 'wx18a2ac992306a5a4',
@@ -67,16 +98,47 @@ Page({
       }
     })
   },
+
   //客服
   handleContact(e) {
     // console.log(e.detail.path)
     // console.log(e.detail.query)
   },
+
   //打开新页面
   openNewPage: function(a) {
-    api.openNewPage(a);
+    var visiter = this.data.visiter;
+    if (visiter) {
+      this.setData({
+        notLogin: true
+      })
+      var url = a.currentTarget.dataset.url;
+      wx.setStorageSync("user-url", url);
+    } else {
+      api.openNewPage(a);
+    }
   },
 
+  //获取用户数据
+  bindGetUserInfo: function(e) {
+    var that = this;
+    api.bindGetUserInfo(e, function(notLogin) {
+      var userInfo = wx.getStorageSync("userInfo");
+      that.setData({
+        notLogin: notLogin,
+        userInfo: userInfo,
+        visiter: false
+      })
+      that.getVIPperiod();
+
+      var url = wx.getStorageSync("user-url");
+      if (url && url != null && url.length > 0) {
+        wx.navigateTo({
+          url: url,
+        })
+      }
+    });
+  },
   //分享
   onShareAppMessage: function(ops) {
     var that = this;
@@ -89,7 +151,4 @@ Page({
     },
     that.setVIPperiod(openId);
   }
-
-
-
 })
