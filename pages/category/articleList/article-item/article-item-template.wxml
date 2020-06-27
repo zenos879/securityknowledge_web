@@ -1,0 +1,26 @@
+<template name='article-list'>
+  <view class='list_content'>
+    <block wx:for="{{listItems}}" wx:key="curIndex">
+      <view class='list_art_container'>
+        <view class="art_cnt">
+          <!-- <view class="art_cnt_first"  bindtap="openArticle" data-url="/pages/category/article/article" data-artid="{{item.art_id}}" > -->
+          <view class="art_cnt_first" bindtap="openPage" data-artpath="{{item.art_path}}" data-url="/pages/category/article/article" data-artid="{{item.art_id}}">
+            <image class="list_dian" src="/image/circle.png"></image>
+            <view class='list_art'>{{item.art_title}}</view>
+          </view>
+          <image wx:if='{{item.collect}}' class='list_collect' catchtap='onCollect' data-artid="{{item.art_id}}" src='/image/collected.png'></image>
+          <image wx:else class='list_collect' bindtap='onCollect' data-list="{{collection_list}}" data-artid="{{item.art_id}}" src='/image/collected-anti.png'></image>
+        </view>
+
+        <!-- <view class="art_desc"  bindtap="openArticle" data-url="/pages/category/article/article" data-artid="{{item.art_id}}"> -->
+        <view class="art_desc" bindtap="openPage" data-artpath="{{item.art_path}}" data-url="/pages/category/article/article" data-artid="{{item.art_id}}">
+          <view class="art_no">{{item.art_no}}</view>
+          <!-- <view class="view_times_wrapper">
+            <image class="view_img" src="/image/view.png"></image>
+            <view class="view_times">{{item.art_view_times}}</view>
+          </view> -->
+        </view>
+      </view>
+    </block>
+  </view>
+</template>

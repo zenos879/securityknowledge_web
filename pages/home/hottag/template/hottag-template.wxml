@@ -1,0 +1,11 @@
+<template name='hottag-list'>
+  <view class="hottag-container">
+    <view class='hottag_content'>
+      <block wx:for="{{hotItems}}" wx:for-index="idx" wx:key="curIndex">
+        <view class="hottag_wrapper" bindtap="gotoAbstract" data-catid="{{item.tag_id}}" data-cname="{{item.tag_title}}"data-cdesc='{{item.tag_title}}' >
+          <view class='tag_title'>{{item.tag_title}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+</template>

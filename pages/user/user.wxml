@@ -1,0 +1,75 @@
+<import src="/pages/login/login.wxml" />
+<import src="/pages/share/share.wxml" />
+<template is="shareTip" data="{{notvip}}"></template>
+<template is="loginTip" data="{{notLogin}}"></template>
+<view class="header">
+  <view class="user">
+    <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+
+    <view class="user_desc">
+      <view wx:if="{{!visiter}}">
+        <text class="user_name">{{userInfo.nickName}}</text>
+        <view class="vip_period">VIP 可用{{vipPeriod}}天</view>
+      </view>
+      <view wx:else>
+        <button class="login_btn" type="primary" bindtap="loginTap">请登录</button>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 功能列表 -->
+<view class="nav" style="height:{{navHeight}}rpx">
+  <view class="nav_part">
+    <view bindtap="openNewPage" class="item" data-url="/pages/home/collect/collect" formType="submit" hoverClass="none">
+      <view class="left_nav">
+        <image class="tubiao" src="/image/wodeshoucang.png"></image>
+        <text>我的收藏</text>
+      </view>
+      <image class="more" src="/image/more.png"></image>
+    </view>
+    <view bindtap="openNewPage" class="item" data-url="/pages/user/mylist/mylist" formType="submit" hoverClass="none">
+      <view class="left_nav">
+        <image class="tubiao" src="/image/wodeqingdan.png"></image>
+        <text>我的清单</text>
+      </view>
+      <image class="more" src="/image/more.png"></image>
+    </view>
+    <view bindtap="openNewPage" class="item" data-url="/pages/home/history/history" formType="submit" hoverClass="none">
+      <view class="left_nav">
+        <image class="tubiao" src="/image/wokanguode.png"></image>
+        <text>我的浏览</text>
+      </view>
+      <image class="more" src="/image/more.png"></image>
+    </view>
+
+  </view>
+  <view class="nav_part">
+    <view bindtap="openNewPage" class="item" data-url="/pages/user/about/about" formType="submit" hoverClass="none">
+      <view class="left_nav">
+        <image class="tubiao" src="/image/guanyuwomen.png"></image>
+        <text>关于我们</text>
+      </view>
+      <image class="more" src="/image/more.png"></image>
+    </view>
+
+    <view bindtap="encourageMe" class="item" data-url="/pages/user/encourage/encourage" formType="submit" hoverClass="none">
+      <view class="left_nav">
+        <image class="tubiao" src="/image/guliyixia.png"></image>
+        <text>鼓励一下</text>
+      </view>
+      <image class="more" src="/image/more.png"></image>
+    </view>
+  </view>
+
+  <view class="nav_btm">
+    <view class="btn">
+      <button class="bottom-but" id="shareBtn" open-type="share" bindcontact="handleShare">分享</button>
+      <button class="bottom-but" open-type="contact" bindcontact="handleContact">在线客服</button>
+    </view>
+    <view class="domainNote">
+      <image src="/image/copyright.png"></image>
+      <text>安法苑</text>
+      <!-- <text>safetylaw.cn</text> -->
+    </view>
+  </view>
+</view>

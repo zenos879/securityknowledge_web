@@ -1,0 +1,20 @@
+.hottag_wrapper { 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #50b7c1;
+  height: 40px;
+  color: white;
+  border-radius: 4px;
+   float: left;  
+  margin: 5px;
+}  
+
+.tag_title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 15px;
+  padding: 0px 10px;
+}

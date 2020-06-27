@@ -1,0 +1,3 @@
+<view>
+  <web-view src="https://www.safetylaw.cn/pdfjs/web/viewer.html?file=https://www.safetylaw.cn/files/{{file_name}}"></web-view>
+</view>

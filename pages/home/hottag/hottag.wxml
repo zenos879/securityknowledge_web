@@ -1,0 +1,4 @@
+<import src='template/hottag-template.wxml' />
+<view>
+  <template is='hottag-list' data='{{hotItems}}' />
+</view>

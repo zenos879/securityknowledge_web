@@ -1,0 +1,14 @@
+<template name="loginTip">
+  <view wx:if="{{notLogin}}" class="login_wrapper">
+    <view class="login_container">
+      <view class="login_info">
+        <image class="login_img" src='/image/logo.png' round></image>
+        <view class='login_subtitle'> 登录安法苑</view>
+        <view class="login_title">安全法律法规免费读</view>
+      </view>
+      <button class='login_buttom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+        授权登录
+      </button>
+    </view>
+  </view>
+</template>

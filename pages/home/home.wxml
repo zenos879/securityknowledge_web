@@ -1,0 +1,110 @@
+<import src="/pages/toast/toast.wxml" />
+<import src="/pages/login/login.wxml" />
+<import src="/pages/share/share.wxml" />
+<import src='/pages/home/hottag/template/hottag-template.wxml' />
+
+<view class="home-container" wx:if="{{showHomePage}}">
+  <!-- 显示右上角的添加收藏提示框-->
+  <template is="toast" data="{{txt,isShow}}"></template>
+  <template is="shareTip" data="{{notvip}}"></template>
+  <template is="loginTip" data="{{notLogin}}"></template>
+  <!--头部，搜索，以及4个分类-->
+  <view class="home-part1">
+    <!-- 头部的滚动图片-->
+    <swiper class="home-swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}" wx:key="idx">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" mode="scaleToFill"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <!--搜索组件-->
+    <view class='search' bindtap="focus">
+      <icon type="search" class="search-img" size="13" color="#405f80"></icon>
+      <input class="search_input" disabled="true" type='text' placeholder='请输入法律法规名称或文号'></input>
+    </view>
+    <!--4个典型分类-->
+    <view class="zan-cell" style="margin:0px;padding:12px 0px;">
+      <view class="zan-cell__bd">
+        <view class="icon-wrap">
+          <view bindtap="goToCategory" data-catid='6' data-cname='国家法律'>
+            <image src="/image/law.png" class="iconstyle"></image>
+            <view class="smallsize">国家法律</view>
+          </view>
+        </view>
+        <view class="icon-wrap">
+          <view bindtap="goToCategory" data-catid='11' data-cname='行政法规'>
+            <image src="/image/regulations.png" class="iconstyle"></image>
+            <view class="smallsize">行政法规</view>
+          </view>
+        </view>
+        <view class="icon-wrap">
+          <view bindtap="goToCategory" data-catid='21' data-cname='部门规章'>
+            <image src="/image/bumenguizhang.png" class="iconstyle"></image>
+            <view class="smallsize">部门规章</view>
+          </view>
+        </view>
+        <view class="icon-wrap">
+          <view bindtap="goToCategory" data-catid='36' data-cname='国家标准'>
+            <image src="/image/guojiabiaozhun.png" class="iconstyle"></image>
+            <view class="smallsize">国家标准</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--热门标签-->
+  <view class="home-part1">
+    <view class="hottag-container">
+      <view class="hottag">
+        <text>热门标签</text>
+        <image class="update_more" src="/image/more.png" bindtap="openNewPage" data-url="/pages/home/hottag/hottag"></image>
+      </view>
+      <view class="hottag_content">
+       <scroll-view  class="hottag_scroll" scroll-x>
+          <block wx:for="{{hotItems}}" wx:for-index="idx" wx:key="curIndex">
+            <!-- <block wx:if="{{idx<10}}"> -->
+              <view class="hottag_wrapper_home scroll-view-item" bindtap="goToCategory" data-catid='{{item.tag_id}}' data-cname='{{item.tag_title}}'>
+                <view class='tag_title'>{{item.tag_title}}</view>
+              </view>
+            <!-- </block> -->
+          </block>
+        </scroll-view>
+      </view>
+
+    </view>
+  </view>
+
+  <!--最新发布-->
+  <view class="home-part1">
+    <view class="update_container">
+      <view class="update">
+        <text>最新发布</text>
+        <image class="update_more" src="/image/more.png" bindtap="openNewPage" data-url="/pages/home/update/update"></image>
+      </view>
+
+      <view class='update_content'>
+        <block wx:for="{{listItems}}" wx:for-index="idx" wx:key="curIndex">
+          <view wx:if="{{idx<5}}">
+            <view class="update_wrapper" bindtap="openPage" data-artpath="{{item.art_path}}" data-url="/pages/category/article/article" data-artid="{{item.art_id}}">
+              <image class="list_dian" src="/image/circle.png"></image>
+              <view class='update_art'>{{item.art_title}}</view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!--整体文章数说明-->
+  <view class="home-part1">
+    <view class="app_note_wrapper">
+      <view class="app_note">
+        目前已收录
+        <text class="total_articles"> {{total_articles}}</text> 部法律法规和标准规范，仍在不断更新中...
+      </view>
+    </view>
+  </view>
+</view>
