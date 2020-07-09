@@ -1,0 +1,133 @@
+.rules_container {
+  background: #f8f8f8;
+}
+
+.search-wrap {
+  position: fixed;
+  top: 0;
+  background: white;
+  z-index: 999;
+  height: 50px;
+  width: 100%;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  height: 40px;
+  background-color: whitesmoke;
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+  border: 1rpx solid whitesmoke;
+  border-radius: 4px;
+}
+
+.search input {
+  border-radius: 20rpx;
+  font-size: 27rpx;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-left: 10rpx;
+  padding-right: 40rpx;
+  line-height: 80rpx;
+  width: 85%;
+}
+
+.search-img {
+  width: 18rpx;
+  height: 18rpx;
+  padding-left: 20rpx;
+}
+
+.sub_cate {
+  top: 50px;
+  position: fixed;
+  height: 40px;
+  background: white;
+}
+
+.sub_cat_scroll {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.sub_cate_inner {
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 5px;
+  height: 25px;
+  font-size: 30rpx;
+}
+
+.current_cate {
+  color: #008792;
+  border-bottom: solid;
+}
+
+.rules {
+  margin-top: 90px;
+}
+
+.rules_wraaper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 7px;
+  margin-top: 3px;
+  padding: 5px;
+  background-color: white;
+}
+
+.rules_single {
+  display: flex;
+  flex-direction: row;
+  padding: 6rpx;
+}
+
+.rules_keyword {
+  border-bottom: 1rpx dashed #ddd;
+  padding: 6rpx;
+}
+
+.rules_label {
+  width: 95px;
+  font-weight: bold;
+}
+
+.rules_content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rules_icon {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.rules_utils {
+  display: flex;
+  flex-direction: row;
+  /* border-top: 1rpx solid #eee; */
+  padding: 9rpx;
+}
+
+.rules_utils_collect {
+  width: 50%;
+  text-align: center;
+  line-height: 40rpx;
+}
+
+.rules_icon, .rules_utils_label {
+  margin-right: 10rpx;
+  vertical-align: middle;
+}
+
+.rules_utils_agree {
+  width: 49%;
+  text-align: center;
+}

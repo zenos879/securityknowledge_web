@@ -18,7 +18,9 @@
     "pages/apps/largess/detail",
     "pages/toast/toast",
     "pages/share/share",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/hiddendanger/hiddendanger",
+    "pages/checkrules/checkrules"
     ],
   "tabBar": {
     "color": "#7A7E83",
@@ -27,16 +29,23 @@
     "backgroundColor": "#f0f0f4",
     "list": [
       {
+        "pagePath": "pages/hiddendanger/hiddendanger",
+        "iconPath": "/image/type1.png",
+        "selectedIconPath": "/image/type.png",
+        "text": "隐患排查"
+      },
+      {
         "pagePath": "pages/home/home",
         "iconPath": "/image/index1.png",
         "selectedIconPath": "/image/index.png",
         "text": "首页"
       },
+      
       {
         "pagePath": "pages/category/category",
         "iconPath": "/image/type1.png",
         "selectedIconPath": "/image/type.png",
-        "text": "分类"
+        "text": "法规分类"
       },
       {
         "pagePath": "pages/user/user",
