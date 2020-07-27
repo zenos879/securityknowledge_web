@@ -1,3 +1,0 @@
-<view wx:if="{{noContent}}" class="noContent">
-  <text>{{noContentToast}}</text>
-</view>

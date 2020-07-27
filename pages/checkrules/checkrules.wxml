@@ -1,5 +1,11 @@
+<import src="/pages/login/login.wxml" />
+<import src="/pages/share/share.wxml" />
 <import src='requirements/requirements-template.wxml' />
 <view class="rules_container">
+  <!--登录和分享框 开始-->
+  <template is="shareTip" data="{{notvip}}"></template>
+  <template is="loginTip" data="{{notLogin}}"></template>
+  <!--登录和分享框 结束-->
   <view class='search-wrap'>
     <view class='search' bindtap="focus">
       <icon type="search" class="search-img" size="13" color="#405f80"></icon>
@@ -12,7 +18,7 @@
     <scroll-view scroll-x="true">
       <view class="sub_cat_scroll">
         <block wx:for="{{thirdCateList}}" wx:for-index="idx" wx:key="curIndex">
-            <text class="{{curThirdCate == item.sub_cate_id ?'marked_cate':'normal_cate'}}" bindtap="goToRequirements" data-catid='{{item.sub_cate_id}}' data-cname='{{item.sub_cate_name}}'>{{item.sub_cate_name}}</text>
+            <text class="{{curThirdCate == item.sub_cate_id ?'marked_cate':'normal_cate'}}" bindtap="clickThirdCate" data-catid='{{item.sub_cate_id}}' data-cname='{{item.sub_cate_name}}'>{{item.sub_cate_name}}</text>
           
         </block>
       </view>
@@ -21,4 +27,8 @@
   <view class="rules">
     <template is="requirements" data="{{curRequirementsList}}"></template>
   </view>
+
 </view>
+ <view wx:if="{{noContent}}" class="noContent" >
+    <text>{{noContentToast}}</text>
+  </view>

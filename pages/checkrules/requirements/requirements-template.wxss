@@ -19,6 +19,9 @@
   padding: 6rpx;
 }
 
+.req_lable, .source_label{
+  letter-spacing: 5rpx;
+}
 .rules_label {
   width: 95px;
   font-weight: bold;
@@ -43,7 +46,6 @@
 .rules_utils_collect {
   width: 50%;
   text-align: center;
-  line-height: 20rpx;
 }
 
 .rules_icon, .rules_utils_label {

@@ -1,6 +1,6 @@
 <view class='search' bindtap="focus">
   <icon type="search" class="search-img" size="13" color="#405f80"></icon>
-  <input type='text' disabled="true" placeholder='请输入法律法规名称或文号'></input>
+  <input type='text' disabled="true" placeholder='请输入关键词'></input>
 </view>
 
 <view class="category_container">

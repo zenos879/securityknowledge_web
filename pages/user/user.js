@@ -18,21 +18,7 @@ Page({
 
   onLoad: function(options) {
     var that = this;
-    var userInfo = wx.getStorageSync("userInfo");
-    console.log(userInfo);
-    if (userInfo && userInfo != null) { //已经登陆的状态
-      that.setData({
-        visiter: false,
-        userInfo: userInfo
-      })
-      that.getVIPperiod();
-    } else { //未登陆的状态，设置默认头像
-      var userInfo = {};
-      userInfo.avatarUrl = that.data.defaultAvatarUrl;
-      this.setData({
-        userInfo: userInfo,
-      });
-    }
+    that.checkLogin();
 
     //设置样式
     wx.getSystemInfo({
@@ -55,7 +41,23 @@ Page({
     })
   },
 
-
+  checkLogin: function() {
+    var that = this;
+    var userInfo = wx.getStorageSync("userInfo");
+    if (userInfo && userInfo != null) { //已经登陆的状态
+      that.setData({
+        visiter: false,
+        userInfo: userInfo
+      })
+      that.getVIPperiod();
+    } else { //未登陆的状态，设置默认头像
+      var userInfo = {};
+      userInfo.avatarUrl = that.data.defaultAvatarUrl;
+      that.setData({
+        userInfo: userInfo,
+      });
+    }
+  },
 
   //获得vip期限
   getVIPperiod: function() {
@@ -64,6 +66,7 @@ Page({
     if (openId != null && openId != '') {
       var getVipleftday = api.api_list.get_vipperiod + "?openId=" + openId;
       api.http(getVipleftday, function(res) {
+        console.log(res);
         that.setData({
           vipPeriod: res
         })
@@ -86,18 +89,18 @@ Page({
     });
   },
 
-  //给我点赞
-  encourageMe: function() {
-    wx.navigateToMiniProgram({
-      appId: 'wx18a2ac992306a5a4',
-      path: 'pages/apps/largess/detail?id=nN72oYbnMLqgPc1CLmE7uw%3D%3D',
-      //   envVersion: 'develop',
-      success(res) {
-        // 打开成功
-        // console.log(res);
-      }
-    })
-  },
+  // //给我点赞
+  // encourageMe: function() {
+  //   wx.navigateToMiniProgram({
+  //     appId: 'wx18a2ac992306a5a4',
+  //     path: 'pages/apps/largess/detail?id=nN72oYbnMLqgPc1CLmE7uw%3D%3D',
+  //     //   envVersion: 'develop',
+  //     success(res) {
+  //       // 打开成功
+  //       // console.log(res);
+  //     }
+  //   })
+  // },
 
   //客服
   handleContact(e) {
@@ -139,6 +142,7 @@ Page({
       }
     });
   },
+
   //分享
   onShareAppMessage: function(ops) {
     var that = this;
@@ -151,8 +155,9 @@ Page({
     },
     that.setVIPperiod(openId);
   },
+
   //分享到朋友圈
-  onShareTimeline: function (res) {
+  onShareTimeline: function(res) {
     return {
       title: '安全生产法律法规，随你看！',
       query: '我是带的参数'

@@ -2,19 +2,19 @@
 <block wx:if="{{curRequirementsList.length>0}}">
   <block wx:for="{{curRequirementsList}}" wx:for-index="idx" wx:key="curIndex">
     <view class='rules_wraaper'>
-      <view wx:if="{{item.keywords!=null&&item.keywords!=''}}">
+      <block wx:if="{{item.keywords!=null&&item.keywords!=''}}">
         <view class='rules_single rules_keyword'>
-          <text class="rules_label">【关 键 词】</text>
+          <text class="rules_label">【关键词】</text>
           <text class="rules_content">{{item.keywords}}</text>
         </view>
-      </view>
+      </block>
       <view class="rules_single">
-        <text class="rules_label">【安全要求】</text>
+        <text class="rules_label req_lable">【要 求】</text>
         <text class="rules_content">{{item.requirements}}</text>
       </view>
       <view wx:if="{{item.source!=null&&item.source!=''}}">
         <view class="rules_single">
-          <text class="rules_label">【依据来源】</text>
+          <text class="rules_label source_label">【来 源】</text>
           <text class="rules_content">{{item.source}}</text>
         </view>
       </view>
@@ -28,7 +28,7 @@
         <view class="rules_utils_agree">
           <image wx:if='{{item.agree}}' class='rules_icon' catchtap='onHAgree' data-reqid='{{item.reqId}}' src="/image/agree.png" class="rules_icon" mode="scaleToFill"></image>
            <image wx:else class='rules_icon' bindtap='onHAgree' data-reqid='{{item.reqId}}' src="/image/agree-anti.png" class="rules_icon" mode="scaleToFill"></image>
-          <text class="rules_utils_label">(点赞)</text>
+          <text class="rules_utils_label">(常见)</text>
         </view>
       </view>
     </view>

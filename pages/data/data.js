@@ -1,55 +1,56 @@
 var api_list = {
   //获得分类信息
-  get_category_api: 'http://127.0.0.1:8080/search/getCategory',
+  get_category_api: 'https://www.safetylaw.cn/safetyknowledge/search/getCategory',
   //通过catid得到文章列表
-  get_article_list_api: 'http://127.0.0.1:8080/search/getArticleList?catId=',
+  get_article_list_api: 'https://www.safetylaw.cn/safetyknowledge/search/getArticleList?catId=',
   //通过catId得到文件标题
-  get_article_title_api: 'http://127.0.0.1:8080/search/getAritlcleTitle?artId=',
+  get_article_title_api: 'https://www.safetylaw.cn/safetyknowledge/search/getAritlcleTitle?artId=',
   //通过artid得到文章详情
-  get_article_api: 'http://127.0.0.1:8080/search/getAriticleInfo?artId=',
+  get_article_api: 'https://www.safetylaw.cn/safetyknowledge/search/getAriticleInfo?artId=',
   //搜索，得到相关的文章总数
-  get_total_articles: 'http://127.0.0.1:8080/search/getTotalArticles',
+  get_total_articles: 'https://www.safetylaw.cn/safetyknowledge/search/getTotalArticles',
   //得到最新文章列表
-  get_update_list: 'http://127.0.0.1:8080/search/getUpdateList',
+  get_update_list: 'https://www.safetylaw.cn/safetyknowledge/search/getUpdateList',
   //搜索文章标题
-  search_article_api: 'http://127.0.0.1:8080/search/searchTitle?search=',
+  search_article_api: 'https://www.safetylaw.cn/safetyknowledge/search/searchTitle?search=',
   //得到所有标签
-  get_hot_tag: 'http://127.0.0.1:8080/search/getHotTag',
+  get_hot_tag: 'https://www.safetylaw.cn/safetyknowledge/search/getHotTag',
   //保存收藏
-  save_collections: 'http://127.0.0.1:8080/user/saveCollections',
+  save_collections: 'https://www.safetylaw.cn/safetyknowledge/user/saveCollections',
   //更新用户浏览历史
-  updateUserViewHistory: 'http://127.0.0.1:8080/user/updateUserViewHistory',
+  updateUserViewHistory: 'https://www.safetylaw.cn/safetyknowledge/user/updateUserViewHistory',
   //更新文章被浏览的次数
-  updateAriticleViewtimes: 'http://127.0.0.1:8080/user/updateArticleViewtimes',
+  updateAriticleViewtimes: 'https://www.safetylaw.cn/safetyknowledge/user/updateArticleViewtimes',
   //得到关于我们
-  get_aboutus: 'http://127.0.0.1:8080/project/getAboutus',
+  get_aboutus: 'https://www.safetylaw.cn/safetyknowledge/project/getAboutus',
   //得到主页的轮播图
-  get_home_img: 'http://127.0.0.1:8080/project/getHomeImage',
+  get_home_img: 'https://www.safetylaw.cn/safetyknowledge/project/getHomeImage',
   //请求用户的openId
-  get_open_id: 'http://127.0.0.1:8080/user/getOpenId',
+  get_open_id: 'https://www.safetylaw.cn/safetyknowledge/user/getOpenId',
   //用户登录
-  register: 'http://127.0.0.1:8080/user/register',
+  register: 'https://www.safetylaw.cn/safetyknowledge/user/register',
   //得到用户的vip时间
-  get_vipperiod: 'http://127.0.0.1:8080/user/getVipperiod',
+  get_vipperiod: 'https://www.safetylaw.cn/safetyknowledge/user/getVipperiod',
   //点击分享以后，更新用户的vip时间
-  update_vipperiod: 'http://127.0.0.1:8080/user/updateVipperiod',
+  update_vipperiod: 'https://www.safetylaw.cn/safetyknowledge/user/updateVipperiod',
 
   //隐患排查：获得分类信息
-  get_requirements_category: 'http://127.0.0.1:8080/hiddendanager/getCategory',
+  get_requirements_category: 'https://www.safetylaw.cn/safetyknowledge/hiddendanager/getCategory',
 
   //隐患排查：得到最后面一层分类
-  get_requierments_last_category: 'http://127.0.0.1:8080/hiddendanager/getLastCategory?upperCatId=',
+  get_requierments_last_category: 'https://www.safetylaw.cn/safetyknowledge/hiddendanager/getLastCategory?upperCatId=',
 
   //隐患排查：通过keyword和catlist进行安全要求的检索
-  search_requirements: 'http://127.0.0.1:8080/hiddendanager/getRequirementsByKeywords?keywords=',
+  search_requirements: 'https://www.safetylaw.cn/safetyknowledge/hiddendanager/getRequirementsByKeywords?keywords=',
 
   //通过reqid得到所有的安全要求
-  search_requirements_by_id:'http://127.0.0.1:8080/hiddendanager/getRequirementsByIds?reqid=',
+  search_requirements_by_id: 'https://www.safetylaw.cn/safetyknowledge/hiddendanager/getRequirementsByIds?reqid=',
 
-  save_hcollections:'http://127.0.0.1:8080/user/saveHCollections',
-  save_hagree:'http://127.0.0.1:8080/user/saveHAgree',
+  save_hcollections: 'https://www.safetylaw.cn/safetyknowledge/user/saveHCollections',
+  save_hagree: 'https://www.safetylaw.cn/safetyknowledge/user/saveHAgree',
   //服务器ip: 49.232.32.154:8080
 
+  get_file_url: 'https://www.safetylaw.cn/files/',
 }
 
 //查询最新发布的列表
@@ -95,7 +96,7 @@ function onCollect(e) {
 }
 
 //安全要求：点击收藏按钮
-function onHCollect(e){
+function onHCollect(e) {
   var collect = false;
   var reqid = e.currentTarget.dataset.reqid;
   var collection_list = wx.getStorageSync("h_collection");
@@ -113,7 +114,7 @@ function onHCollect(e){
   }
   var open_id = wx.getStorageSync("openId");
   var save_collections = api_list.save_hcollections + "?openId=" + open_id + "&HCollections=" + collection_list;
-  http(save_collections, function () { });
+  http(save_collections, function() {});
   wx.setStorageSync("h_collection", collection_list);
   convertHCollectAndAgreeToListItmes();
 
@@ -126,7 +127,7 @@ function onHCollect(e){
 }
 
 //安全要求：点赞按钮
-function onHAgree(e){
+function onHAgree(e) {
   var agree = false;
   var reqid = e.currentTarget.dataset.reqid;
   var agree_list = wx.getStorageSync("h_agree");
@@ -144,7 +145,7 @@ function onHAgree(e){
   }
   var open_id = wx.getStorageSync("openId");
   var save_agree = api_list.save_hagree + "?openId=" + open_id + "&HAgree=" + agree_list;
-  http(save_agree, function () { });
+  http(save_agree, function() {});
   wx.setStorageSync("h_agree", agree_list);
   convertHCollectAndAgreeToListItmes();
 
@@ -190,7 +191,7 @@ function convertHCollectAndAgreeToListItmes() {
       } else {
         item.collect = false;
       }
-     
+
       //点赞加入
       if (h_agree && h_agree.length > 0 && h_agree.indexOf(reqId) > -1) {
         item.agree = true;
@@ -213,22 +214,18 @@ function openNewPage(a) {
 
 //打开页面
 function openPage(notLogin, notVip) {
-  // var notLogin = wx.getStorageSync("notLogin");
-  // var notVip = wx.getStorageSync("notVip");
+  showLoading("正在加载...");
   var fileurl = wx.getStorageSync("fileurl");
   var artid = wx.getStorageSync("artid");
   var artpath = wx.getStorageSync("artpath");
   if (notLogin != "undefined" && notVip != "undefined" && !notLogin && !notVip) {
-    // var fileurl = a.currentTarget.dataset.url;
-    // var artid = a.currentTarget.dataset.artid;
-    // var artpath = a.currentTarget.dataset.artpath;
-    // openArticle(artid); //需要换回普通的打开方式时，此句后后面的切换即可。
     var lastName = artpath.substring(artpath.lastIndexOf(".") + 1, artpath.length);
     if (lastName == "pdf" || lastName == "PDF") {
       wx.setStorageSync('artid', artid);
       wx.setStorageSync('artpath', artpath);
       updateAriticleViewtimes(artid);
       updateUserViewHistory(artid);
+      hideLoading();
       wx.navigateTo({
         url: fileurl
       });
@@ -285,18 +282,22 @@ function openArticle(file_url, artid) {
     wx.downloadFile({ //下载到本地
       url: file_url,
       success: function(res) {
-        var Path = res.tempFilePath; //得到本地地址
+        var path = res.tempFilePath; //得到本地地址
+        hideLoading();
         wx.openDocument({ //打开文件
-          filePath: Path,
+          filePath: path,
           success: function(res) { //更新浏览数、我的浏览
             updateAriticleViewtimes(artid);
             updateUserViewHistory(artid);
-            hideLoading();
           }
         })
       },
       fail: function(res) {
-        console.log(res);
+        console.log(file_url);
+        hideLoading();
+        wx.showToast({
+          title: '实在抱歉，该文件有点问题，我们正在极力修复...',
+        })
       }
     })
   } else {
@@ -438,8 +439,8 @@ function onOpenIdComplete(openId, userInfo) {
         var hid_agree = res.data[0].hid_agree;
         wx.setStorageSync("collection_list", collectionList);
         wx.setStorageSync("history_list", historyList);
-        wx.setStorageSync("hid_agree", hid_agree);
-        wx.setStorageSync("hid_collections", hid_collections);
+        wx.setStorageSync("h_agree", hid_agree);
+        wx.setStorageSync("h_collections", hid_collections);
       }
     }
   })
@@ -451,9 +452,6 @@ function ifVip(callback) {
   var getVipleftday = api_list.get_vipperiod + "?openId=" + openId;
   http(getVipleftday, function(res) {
     if (res == 0) { //无权限
-      // that.setData({
-      //   notvip: true
-      // })
       callback(true);
       setTimeout(function() {
         var openId = wx.getStorageSync("openId");
@@ -467,10 +465,32 @@ function ifVip(callback) {
   });
 }
 
+//隐患排查：查看是否有VIP权限，与上面方法的不用是，这个不用打开文章
+function hiddenIfVip(callback) {
+  var openId = wx.getStorageSync("openId");
+  var getVipleftday = api_list.get_vipperiod + "?openId=" + openId;
+  console.log(getVipleftday);
+  http(getVipleftday, function(res) {
+    console.log(res);
+    if (res <= 0) { //无权限
+      callback(true);
+      console.log("not vip");
+      setTimeout(function() {
+        var openId = wx.getStorageSync("openId");
+        updateVIPperiod(openId); //然后更新vip权限
+        callback(false); //返回
+      }, 10000);
+    } else {
+      callback(false);
+    }
+  });
+
+}
+
 module.exports = {
   api_list: api_list,
   query: queryUpdate,
-  onCollect: onCollect,//法律法规：点击收藏按钮
+  onCollect: onCollect, //法律法规：点击收藏按钮
   openPage: openPage,
   showLoading: showLoading,
   hideLoading: hideLoading,
@@ -483,7 +503,9 @@ module.exports = {
   getSetting: getSetting,
   bindGetUserInfo: bindGetUserInfo,
   ifVip: ifVip,
-  convertHCollectAndAgreeToListItmes: convertHCollectAndAgreeToListItmes,//安全要求：数据转换
-  onHCollect: onHCollect,  //安全要求：点击收藏
+  convertHCollectAndAgreeToListItmes: convertHCollectAndAgreeToListItmes, //安全要求：数据转换
+  onHCollect: onHCollect, //安全要求：点击收藏
   onHAgree: onHAgree,
+  hiddenIfVip: hiddenIfVip, //安全要求：判断是否有VIP权限
+  onOpenIdComplete: onOpenIdComplete //用户登录后，获取用户数据
 }

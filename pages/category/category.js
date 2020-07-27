@@ -1,4 +1,5 @@
 var api = require('../data/data.js');
+const app = getApp();
 Page({
   data: {
     cateItems: null,
@@ -15,7 +16,6 @@ Page({
       url: api.api_list.get_category_api,
       method: 'GET',
       success: function(res) {
-        console.log(res.data);
         self.setData({
           cateItems: res.data
         })

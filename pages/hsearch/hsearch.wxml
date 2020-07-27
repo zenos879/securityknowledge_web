@@ -6,7 +6,7 @@
     <view class="search-wrap">
       <view class='search'>
         <icon type="search" class="search-img" size="13" color="#405f80"></icon>
-        <input class="search-input" type='text' focus="true" placeholder='请输入安全要求的关键词' confirm-type='search' value="{{inputValue}}" bindconfirm="query" bindinput="bindinput"></input>
+        <input class="search-input" type='text' focus="true" placeholder='请输入关键词' confirm-type='search' value="{{inputValue}}" bindconfirm="query" bindinput="bindinput"></input>
 
         <image wx:if="{{showCancelImg}}" src="/image/xx.png" class="xx-img" catchtap="onCancelImgTap"></image>
       </view>

@@ -43,13 +43,13 @@
       </view>
       <image class="more" src="/image/more.png"></image>
     </view>
-    <view bindtap="openNewPage" class="item" data-url="/pages/user/hagree/hagree" formType="submit" hoverClass="none">
+    <!-- <view bindtap="openNewPage" class="item" data-url="/pages/user/hagree/hagree" formType="submit" hoverClass="none">
       <view class="left_nav">
         <image class="tubiao" src="/image/agree-anti.png"></image>
         <text>「隐患排查」点赞</text>
       </view>
       <image class="more" src="/image/more.png"></image>
-    </view>
+    </view> -->
   </view>
   <view class="nav_part">
     <view bindtap="openNewPage" class="item" data-url="/pages/user/about/about" formType="submit" hoverClass="none">
@@ -60,13 +60,13 @@
       <image class="more" src="/image/more.png"></image>
     </view>
 
-    <view bindtap="encourageMe" class="item" data-url="/pages/user/encourage/encourage" formType="submit" hoverClass="none">
+    <!-- <view bindtap="encourageMe" class="item" data-url="/pages/user/encourage/encourage" formType="submit" hoverClass="none">
       <view class="left_nav">
         <image class="tubiao" src="/image/guliyixia.png"></image>
         <text>鼓励一下</text>
       </view>
       <image class="more" src="/image/more.png"></image>
-    </view>
+    </view> -->
   </view>
 
   <view class="nav_btm">

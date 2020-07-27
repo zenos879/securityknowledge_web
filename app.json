@@ -26,32 +26,32 @@
     ],
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#993333",
+    "selectedColor": "#008792",
     "borderStyle": "black",
     "backgroundColor": "#f0f0f4",
     "list": [
       {
         "pagePath": "pages/home/home",
-        "iconPath": "/image/index1.png",
-        "selectedIconPath": "/image/index.png",
+        "iconPath": "/image/home0.png",
+        "selectedIconPath": "/image/home1.png",
         "text": "首页"
       },
       {
         "pagePath": "pages/hiddendanger/hiddendanger",
-        "iconPath": "/image/hiddendanger.png",
-        "selectedIconPath": "/image/hiddendanger1.png",
+        "iconPath": "/image/req0.png",
+        "selectedIconPath": "/image/req1.png",
         "text": "隐患排查"
       },
       {
         "pagePath": "pages/category/category",
-        "iconPath": "/image/type1.png",
-        "selectedIconPath": "/image/type.png",
+        "iconPath": "/image/article0.png",
+        "selectedIconPath": "/image/article1.png",
         "text": "法规分类"
       },
       {
         "pagePath": "pages/user/user",
-        "iconPath": "/image/center1.png",
-        "selectedIconPath": "/image/center.png",
+        "iconPath": "/image/my0.png",
+        "selectedIconPath": "/image/my1.png",
         "text": "我的"
       }
     ]

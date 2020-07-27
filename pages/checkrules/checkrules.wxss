@@ -1,4 +1,7 @@
 @import "requirements/requirements-template.wxss";
+@import "/pages/share/share.wxss";
+@import "/pages/login/login.wxss";
+
 .rules_container {
   background: #f8f8f8;
 }
@@ -64,7 +67,8 @@
 .normal_cate {
   display: flex;
   height: 25px;
-  width: 200rpx;
+  /* width: 200rpx; */
+  width:100%;
   margin-left: 20px;
   margin-top: 5px;
   font-size: 30rpx;
@@ -74,13 +78,23 @@
 .marked_cate {
   display: flex;
   height: 25px;
-  width: 100%;
+  /* width: 200rpx; */
+  width:100%;
   margin-left: 20px;
   margin-top: 5px;
   font-size: 30rpx;
   white-space: nowrap;
   color: #008792;
-  border-bottom: solid;
+  font-weight: bold;
+  text-decoration: underline;
+   padding-bottom:5px; 
+  /* border-bottom: solid; */
+}
+
+.noContent{
+  padding: 10px 10px;
+  text-align: center;
+
 }
 
 /* .rules {

@@ -44,7 +44,7 @@ page {
 
 .category_container {
   position: fixed;
-  top:50px;
+  top: 50px;
   width: 100%;
   height: 100%;
   background-color: #fff;
@@ -59,15 +59,18 @@ page {
   background: #f8f8f8;
   text-align: center;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 28rpx;
 }
 
 .nav_left .nav_left_items {
-  height: 60px;
-  line-height: 60px;
-  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120rpx;
+  padding: 10rpx 20rpx;
   border-bottom: 1px solid #ddd;
   font-size: 14px;
+  word-break: break-all;
 }
 
 .nav_left .nav_left_items.active {

@@ -1,4 +1,5 @@
 var api = require('../data/data.js')
+const app = getApp();
 Page({
   data: {
     inputValue: '',

@@ -1,4 +1,5 @@
 var api = require('../data/data.js');
+const app = getApp();
 Page({
   data: {
     cateItems: null,
@@ -15,7 +16,6 @@ Page({
       url: api.api_list.get_requirements_category,
       method: 'GET',
       success: function(res) {
-        console.log(res.data);
         self.setData({
           cateItems: res.data
         })
@@ -29,10 +29,20 @@ Page({
         var clientHeight = res.windowHeight;
         var clientWidth = res.windowWidth;
         var rpxR = 750 / clientWidth;
-        var navRightHeight = clientHeight * 0.5 * rpxR;
+        var navRightHeight = clientHeight * rpxR * 0.35;
+        console.log(clientHeight);
+        console.log(clientWidth);
+        console.log(navRightHeight);
         self.setData({
           navRightHeight: navRightHeight
         });
+ 
+        // var navTest = (clientHeight * 750 / clientWidth )*0.5 - 30;
+        // console.log(navTest);
+        // self.setData({
+        //   navRightHeight: navTest
+        // })
+
       }
     });
 
@@ -54,7 +64,7 @@ Page({
   // 获取到焦点---需要单独有一个搜索页面，区别于文章的检索
   focus: function(e) {
     wx.navigateTo({
-      url: '/pages/home/hsearch/hsearch',
+      url: '/pages/hsearch/hsearch',
     })
   },
 
@@ -78,6 +88,13 @@ Page({
       title: "安法苑，法律法规任您看!",
       path: path + '?userOpenId=' + openId,
       imageUrl: '/image/share.png',
+    }
+  },
+  //分享到朋友圈
+  onShareTimeline: function (res) {
+    return {
+      title: '安全生产隐患排查，随你看！',
+      query: '我是带的参数'
     }
   }
 })
