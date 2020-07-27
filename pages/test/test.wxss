@@ -1,7 +1,22 @@
-@import "requirements/requirements-template.wxss";
-.rules_container {
-  background: #f8f8f8;
+.top {
+  margin-top: 50px;
+  /* position: fixed; */
+  height: 40px; 
+  background: red;
 }
+
+
+.test {
+  display: flex;
+  flex-direction: row; 
+}
+.single-test{
+  display: flex;
+  align-items: center;
+  width:200rpx;
+}
+ 
+
 
 .search-wrap {
   position: fixed;
@@ -50,39 +65,8 @@
 }
 
 .sub_cate {
-  margin-top: 50px;
-  height: 40px;
-  background-color: white;
+ top: 100px;
+  /*  position: fixed;*/
+  height: 40px; 
+  background: red;
 }
-
-.sub_cat_scroll {
-  display: flex;
-  flex-direction: row;
-  line-height: 30px;
-}
-
-.normal_cate {
-  display: flex;
-  height: 25px;
-  width: 200rpx;
-  margin-left: 20px;
-  margin-top: 5px;
-  font-size: 30rpx;
-  white-space: nowrap;
-}
-
-.marked_cate {
-  display: flex;
-  height: 25px;
-  width: 100%;
-  margin-left: 20px;
-  margin-top: 5px;
-  font-size: 30rpx;
-  white-space: nowrap;
-  color: #008792;
-  border-bottom: solid;
-}
-
-/* .rules {
-  margin-top: 20px;
-} */

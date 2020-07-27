@@ -1,26 +1,54 @@
 var api_list = {
-  get_category_api: 'https://www.safetylaw.cn/safetyknowledge/search/getCategory',
-  get_article_list_api: 'https://www.safetylaw.cn/safetyknowledge/search/getArticleList?catId=',
-  get_article_title_api: 'https://www.safetylaw.cn/safetyknowledge/search/getAritlcleTitle?artId=',
-  get_article_api: 'https://www.safetylaw.cn/safetyknowledge/search/getAriticleInfo?artId=',
-  get_total_articles: 'https://www.safetylaw.cn/safetyknowledge/search/getTotalArticles',
-  get_update_list: 'https://www.safetylaw.cn/safetyknowledge/search/getUpdateList',
-  search_article_api: 'https://www.safetylaw.cn/safetyknowledge/search/searchTitle?search=',
-  get_hot_tag: 'https://www.safetylaw.cn/safetyknowledge/search/getHotTag',
-  save_collections: 'https://www.safetylaw.cn/safetyknowledge/user/saveCollections',
-  updateUserViewHistory: 'https://www.safetylaw.cn/safetyknowledge/user/updateUserViewHistory',
-  updateAriticleViewtimes: 'https://www.safetylaw.cn/safetyknowledge/user/updateArticleViewtimes',
-  get_aboutus: 'https://www.safetylaw.cn/safetyknowledge/project/getAboutus',
-  get_home_img: 'https://www.safetylaw.cn/safetyknowledge/project/getHomeImage',
-  get_open_id: 'https://www.safetylaw.cn/safetyknowledge/user/getOpenId',
-  register: 'https://www.safetylaw.cn/safetyknowledge/user/register',
-  get_vipperiod: 'https://www.safetylaw.cn/safetyknowledge/user/getVipperiod',
-  update_vipperiod: 'https://www.safetylaw.cn/safetyknowledge/user/updateVipperiod',
+  //获得分类信息
+  get_category_api: 'http://127.0.0.1:8080/search/getCategory',
+  //通过catid得到文章列表
+  get_article_list_api: 'http://127.0.0.1:8080/search/getArticleList?catId=',
+  //通过catId得到文件标题
+  get_article_title_api: 'http://127.0.0.1:8080/search/getAritlcleTitle?artId=',
+  //通过artid得到文章详情
+  get_article_api: 'http://127.0.0.1:8080/search/getAriticleInfo?artId=',
+  //搜索，得到相关的文章总数
+  get_total_articles: 'http://127.0.0.1:8080/search/getTotalArticles',
+  //得到最新文章列表
+  get_update_list: 'http://127.0.0.1:8080/search/getUpdateList',
+  //搜索文章标题
+  search_article_api: 'http://127.0.0.1:8080/search/searchTitle?search=',
+  //得到所有标签
+  get_hot_tag: 'http://127.0.0.1:8080/search/getHotTag',
+  //保存收藏
+  save_collections: 'http://127.0.0.1:8080/user/saveCollections',
+  //更新用户浏览历史
+  updateUserViewHistory: 'http://127.0.0.1:8080/user/updateUserViewHistory',
+  //更新文章被浏览的次数
+  updateAriticleViewtimes: 'http://127.0.0.1:8080/user/updateArticleViewtimes',
+  //得到关于我们
+  get_aboutus: 'http://127.0.0.1:8080/project/getAboutus',
+  //得到主页的轮播图
+  get_home_img: 'http://127.0.0.1:8080/project/getHomeImage',
+  //请求用户的openId
+  get_open_id: 'http://127.0.0.1:8080/user/getOpenId',
+  //用户登录
+  register: 'http://127.0.0.1:8080/user/register',
+  //得到用户的vip时间
+  get_vipperiod: 'http://127.0.0.1:8080/user/getVipperiod',
+  //点击分享以后，更新用户的vip时间
+  update_vipperiod: 'http://127.0.0.1:8080/user/updateVipperiod',
 
-  get_file_url: 'https://www.safetylaw.cn/files/',
+  //隐患排查：获得分类信息
+  get_requirements_category: 'http://127.0.0.1:8080/hiddendanager/getCategory',
 
-  //49.232.32.154:8080
-  get_local_file_path: 'I:\\0法律法规标准\\已整理\\',
+  //隐患排查：得到最后面一层分类
+  get_requierments_last_category: 'http://127.0.0.1:8080/hiddendanager/getLastCategory?upperCatId=',
+
+  //隐患排查：通过keyword和catlist进行安全要求的检索
+  search_requirements: 'http://127.0.0.1:8080/hiddendanager/getRequirementsByKeywords?keywords=',
+
+  //通过reqid得到所有的安全要求
+  search_requirements_by_id:'http://127.0.0.1:8080/hiddendanager/getRequirementsByIds?reqid=',
+
+  save_hcollections:'http://127.0.0.1:8080/user/saveHCollections',
+  save_hagree:'http://127.0.0.1:8080/user/saveHAgree',
+  //服务器ip: 49.232.32.154:8080
 
 }
 
@@ -35,7 +63,7 @@ function queryUpdate() {
   })
 }
 
-//点击收藏
+//法律法规：点击收藏按钮
 function onCollect(e) {
   var collect = false;
   var artid = e.currentTarget.dataset.artid;
@@ -66,6 +94,67 @@ function onCollect(e) {
   })
 }
 
+//安全要求：点击收藏按钮
+function onHCollect(e){
+  var collect = false;
+  var reqid = e.currentTarget.dataset.reqid;
+  var collection_list = wx.getStorageSync("h_collection");
+  if (collection_list && collection_list.length > 0) { //已收藏列表，非空
+    if (collection_list.indexOf(reqid) > -1) { //已收藏中存在当前artid，用户点击取消收藏
+      collect = false;
+      collection_list.splice(collection_list.indexOf(reqid), 1); //删除
+    } else { //用户点击 收藏
+      collect = true;
+      collection_list.push(reqid);
+    }
+  } else {
+    collect = true;
+    collection_list = [reqid];
+  }
+  var open_id = wx.getStorageSync("openId");
+  var save_collections = api_list.save_hcollections + "?openId=" + open_id + "&HCollections=" + collection_list;
+  http(save_collections, function () { });
+  wx.setStorageSync("h_collection", collection_list);
+  convertHCollectAndAgreeToListItmes();
+
+  //显示提示框
+  wx.showToast({
+    title: collect ? '收藏成功' : '取消成功',
+    duration: 3000,
+    icon: 'success'
+  })
+}
+
+//安全要求：点赞按钮
+function onHAgree(e){
+  var agree = false;
+  var reqid = e.currentTarget.dataset.reqid;
+  var agree_list = wx.getStorageSync("h_agree");
+  if (agree_list && agree_list.length > 0) { //已收藏列表，非空
+    if (agree_list.indexOf(reqid) > -1) { //已收藏中存在当前artid，用户点击取消收藏
+      agree = false;
+      agree_list.splice(agree_list.indexOf(reqid), 1); //删除
+    } else { //用户点击 收藏
+      agree = true;
+      agree_list.push(reqid);
+    }
+  } else {
+    agree = true;
+    agree_list = [reqid];
+  }
+  var open_id = wx.getStorageSync("openId");
+  var save_agree = api_list.save_hagree + "?openId=" + open_id + "&HAgree=" + agree_list;
+  http(save_agree, function () { });
+  wx.setStorageSync("h_agree", agree_list);
+  convertHCollectAndAgreeToListItmes();
+
+  //显示提示框
+  wx.showToast({
+    title: agree ? '点赞成功' : '取消点赞',
+    duration: 3000,
+    icon: 'success'
+  })
+}
 
 //将收藏信息放入listItems中，以便前台展示
 function convertCollectListToListItmes(collection_list) {
@@ -85,6 +174,35 @@ function convertCollectListToListItmes(collection_list) {
   }
   wx.setStorageSync("listItems", listItems);
 }
+
+//将安全要求部分的收藏和点赞放入list_Item中，以便前台展示
+function convertHCollectAndAgreeToListItmes() {
+  var h_collection = wx.getStorageSync("h_collection");
+  var h_agree = wx.getStorageSync("h_agree");
+  var listItems = wx.getStorageSync("h_listItems");
+  if (listItems && listItems.length > 0) {
+    for (var i = 0; i < listItems.length; i++) {
+      var item = listItems[i];
+      var reqId = item.reqId;
+      //收藏的加入
+      if (h_collection && h_collection.length > 0 && h_collection.indexOf(reqId) > -1) {
+        item.collect = true;
+      } else {
+        item.collect = false;
+      }
+     
+      //点赞加入
+      if (h_agree && h_agree.length > 0 && h_agree.indexOf(reqId) > -1) {
+        item.agree = true;
+      } else {
+        item.agree = false;
+      }
+      listItems[i] = item;
+    }
+  }
+  wx.setStorageSync("h_listItems", listItems);
+}
+
 
 function openNewPage(a) {
   var e = a.currentTarget.dataset.url;
@@ -316,8 +434,12 @@ function onOpenIdComplete(openId, userInfo) {
       if (res.data != null) {
         var collectionList = res.data[0].collections;
         var historyList = res.data[0].histories;
+        var hid_collections = res.data[0].hid_collections;
+        var hid_agree = res.data[0].hid_agree;
         wx.setStorageSync("collection_list", collectionList);
         wx.setStorageSync("history_list", historyList);
+        wx.setStorageSync("hid_agree", hid_agree);
+        wx.setStorageSync("hid_collections", hid_collections);
       }
     }
   })
@@ -340,7 +462,7 @@ function ifVip(callback) {
         openPage(false, false);
       }, 10000);
     } else {
-      openPage(false,false);
+      openPage(false, false);
     }
   });
 }
@@ -348,7 +470,7 @@ function ifVip(callback) {
 module.exports = {
   api_list: api_list,
   query: queryUpdate,
-  onCollect: onCollect,
+  onCollect: onCollect,//法律法规：点击收藏按钮
   openPage: openPage,
   showLoading: showLoading,
   hideLoading: hideLoading,
@@ -360,5 +482,8 @@ module.exports = {
   updateVIPperiod: updateVIPperiod,
   getSetting: getSetting,
   bindGetUserInfo: bindGetUserInfo,
-  ifVip:ifVip
+  ifVip: ifVip,
+  convertHCollectAndAgreeToListItmes: convertHCollectAndAgreeToListItmes,//安全要求：数据转换
+  onHCollect: onHCollect,  //安全要求：点击收藏
+  onHAgree: onHAgree,
 }

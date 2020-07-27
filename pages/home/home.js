@@ -40,7 +40,7 @@ Page({
 
   //加载首页数据
   loadHomePageData: function() {
-    //获取热门标签
+    //获取'热门标签'
     var url = api.api_list.get_hot_tag;
     api.http(url, this.loadHottag);
 
@@ -76,6 +76,7 @@ Page({
     })
   },
 
+  //加载文章总数
   loadTotalArtNo: function(res) {
     var self = this;
     self.setData({
@@ -83,12 +84,14 @@ Page({
     })
   },
 
+  //加载最近更新
   loadUpdate: function(res) {
     var self = this;
     self.setData({
       listItems: res
     })
   },
+  //加载热门标签
   loadHottag: function(res) {
     var self = this;
     wx.setStorageSync("hottag", res);
@@ -190,6 +193,15 @@ Page({
     that.setData({
       notvip: data
     })
+  },
+
+
+  //分享到朋友圈
+  onShareTimeline:function(res) {
+    return {
+      title: '安全生产法律法规，随你看！',
+      query: '我是带的参数'
+    }
   }
 
 

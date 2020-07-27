@@ -19,7 +19,7 @@ Page({
     } else {
       this.setData({
         noContent: true,
-        noContentToast: "您还没有收藏的规范哦，快去点击小星星，添加收藏吧 ^_^..."
+        noContentToast: "您还没有收藏的「法律法规」哦，快去点击小星星，添加收藏吧 ^_^..."
       })
     }
     api.hideLoading();

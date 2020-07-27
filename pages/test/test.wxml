@@ -1,0 +1,20 @@
+  <view class='search-wrap'>
+    <view class='search' bindtap="focus">
+      <icon type="search" class="search-img" size="13" color="#405f80"></icon>
+      <input type='text' placeholder='请输入法律法规名称或文号' focus="{{isforcus}}" confirm-type='search' value="{{inputValue}}" bindconfirm="searchReqirements" bindinput="showCancelImg"></input>
+      <image wx:if="{{showCancelImg}}" src="/image/xx.png" class="xx-img" catchtap="onCancelImgTap"></image>
+    </view>
+  </view>
+
+<view class="top">
+
+
+<scroll-view scroll-x="true">
+  <view class="test">
+    <view wx:for-items="{{scrolls}}" wx:key="name">
+      <view  class="single-test">{{item.name}}</view>
+    </view>
+  </view>
+</scroll-view>
+
+</view>

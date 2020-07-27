@@ -1,0 +1,24 @@
+<import src="/pages/share/share.wxml" />
+<import src="/pages/login/login.wxml" />
+<import src="/pages/checkrules/requirements/requirements-template.wxml" />
+<view class="search-container">
+  <view class="search-fixed">
+    <view class="search-wrap">
+      <view class='search'>
+        <icon type="search" class="search-img" size="13" color="#405f80"></icon>
+        <input class="search-input" type='text' focus="true" placeholder='请输入安全要求的关键词' confirm-type='search' value="{{inputValue}}" bindconfirm="query" bindinput="bindinput"></input>
+
+        <image wx:if="{{showCancelImg}}" src="/image/xx.png" class="xx-img" catchtap="onCancelImgTap"></image>
+      </view>
+    </view>
+    <view wx:if="{{searchCnt>0}}" class="search-result-wrap">
+      <view class="search-result">数据总条数：{{searchCnt}} </view>
+    </view>
+  </view>
+   <view class="rules">
+    <template is="requirements" data="{{curRequirementsList}}"></template>
+  </view>
+
+  <template is="shareTip" data="{{notvip}}"></template>
+  <template is="loginTip" data="{{notLogin}}"></template> 
+</view>

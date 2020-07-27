@@ -1,0 +1,11 @@
+<import src='../../checkrules/requirements/requirements-template.wxml' />
+<view class="rules_container">
+  <view class="rules">
+
+    <template is="requirements" data="{{curRequirementsList}}"></template>
+
+    <view wx:if="{{noContent}}" class="noContent">
+      <text>{{noContentToast}}</text>
+    </view>
+  </view>
+</view>

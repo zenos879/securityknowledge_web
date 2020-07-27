@@ -2,19 +2,20 @@ var api = require('../data/data.js');
 Page({
   data: {
     cateItems: null,
-    curNav: 1,
+    curNav: 5,
     curIndex: 0,
     searchData: {},
     navRightHeight: 0,
   },
 
-  onLoad: function () {
+  onLoad: function() {
     api.showLoading("正在加载...");
     var self = this;
     wx.request({
-      url: api.api_list.get_category_api,
+      url: api.api_list.get_requirements_category,
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
+        console.log(res.data);
         self.setData({
           cateItems: res.data
         })
@@ -24,7 +25,7 @@ Page({
 
     //获得窗口的高度，设置右侧滚动窗口的高度
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         var clientHeight = res.windowHeight;
         var clientWidth = res.windowWidth;
         var rpxR = 750 / clientWidth;
@@ -37,8 +38,9 @@ Page({
 
 
   },
+
   //事件处理函数  
-  switchRightTab: function (e) {
+  switchRightTab: function(e) {
     // 获取item项的id，和数组的下标值  
     let id = e.target.dataset.id,
       index = parseInt(e.target.dataset.index);
@@ -48,14 +50,15 @@ Page({
       curIndex: index
     })
   },
-  // 获取到焦点
-  focus: function (e) {
+
+  // 获取到焦点---需要单独有一个搜索页面，区别于文章的检索
+  focus: function(e) {
     wx.navigateTo({
-      url: '/pages/home/search/search',
+      url: '/pages/home/hsearch/hsearch',
     })
   },
 
-  gotoAbstract: function (e) {
+  gotoAbstract: function(e) {
     var yCatId = e.currentTarget.dataset.catid;
     var yCatName = e.currentTarget.dataset.cname;
     var yCatDesc = e.currentTarget.dataset.cdesc;
@@ -68,7 +71,7 @@ Page({
   },
 
   //分享
-  onShareAppMessage: function (ops) {
+  onShareAppMessage: function(ops) {
     var path = "/pages/hiddendanger/hiddendanger";
     var openId = wx.getStorageSync('openId');
     return {

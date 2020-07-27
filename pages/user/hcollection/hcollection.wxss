@@ -1,0 +1,7 @@
+@import "../../checkrules/requirements/requirements-template.wxss";
+.noContent{
+  padding: 10px 10px;
+}
+.list_content{
+  margin-top:0px;
+}

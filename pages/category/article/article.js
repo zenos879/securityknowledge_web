@@ -110,5 +110,12 @@ Page({
       path: path + '?userOpenId=' + openId,
       imageUrl: '/image/share.png',
     }
+  },
+  //分享到朋友圈
+  onShareTimeline: function (res) {
+    return {
+      title: '安全生产法律法规，随你看！',
+      query: '我是带的参数'
+    }
   }
 })

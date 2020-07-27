@@ -55,114 +55,135 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
-					"name": "home",
+					"id": 0,
+					"name": "首页",
 					"pathName": "pages/home/home",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "category",
+					"id": 1,
+					"name": "分类页面",
 					"pathName": "pages/category/category",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "user",
+					"id": 2,
+					"name": "个人中心",
 					"pathName": "pages/user/user",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 3,
-					"name": "articleList",
+					"name": "文章列表",
 					"pathName": "pages/category/articleList/articleList",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "article",
+					"id": 4,
+					"name": "文章",
 					"pathName": "pages/article/article",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 5,
-					"name": "login",
+					"name": "登录",
 					"pathName": "pages/login/login",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 6,
-					"name": "collect",
+					"name": "收藏",
 					"pathName": "pages/home/collect/collect",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "search",
+					"id": 7,
+					"name": "搜索",
 					"pathName": "pages/home/search/search",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "history",
+					"id": 8,
+					"name": "历史",
 					"pathName": "pages/home/history/history",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "about",
+					"id": 9,
+					"name": "关于我们",
 					"pathName": "pages/user/about/about",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "update",
+					"id": 10,
+					"name": "最近更新",
 					"pathName": "pages/home/update/update",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "hottag",
+					"id": 11,
+					"name": "热门标签",
 					"pathName": "pages/home/hottag/hottag",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "test",
-					"pathName": "pages/user/test/test",
+					"id": 12,
+					"name": "测试",
+					"pathName": "pages/test/test",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "encourage",
+					"id": 13,
+					"name": "给我们点赞",
 					"pathName": "pages/user/encourage/encourage",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/share/share",
+					"id": 14,
+					"name": "分享",
 					"pathName": "pages/share/share",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/checkrules/checkrules",
+					"id": 15,
+					"name": "安全要求",
 					"pathName": "pages/checkrules/checkrules",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "隐患排查",
+					"pathName": "pages/hiddendanger/hiddendanger",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "隐患-搜索",
+					"pathName": "pages/hsearch/hsearch",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的收藏-隐患排查",
+					"pathName": "pages/user/hcollection/hcollection",
 					"scene": null
 				}
 			]

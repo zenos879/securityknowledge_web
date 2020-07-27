@@ -1,49 +1,24 @@
+<import src='requirements/requirements-template.wxml' />
 <view class="rules_container">
   <view class='search-wrap'>
     <view class='search' bindtap="focus">
       <icon type="search" class="search-img" size="13" color="#405f80"></icon>
-      <input type='text' disabled="true" placeholder='请输入法律法规名称或文号'></input>
+      <input type='text' placeholder='请输入法律法规名称或文号' focus="{{isforcus}}" confirm-type='search' value="{{inputValue}}" bindconfirm="searchReqirements" bindinput="showCancelImg"></input>
+      <image wx:if="{{showCancelImg}}" src="/image/xx.png" class="xx-img" catchtap="onCancelImgTap"></image>
     </view>
   </view>
-  <view class='sub_cate'>
-    <scroll-view class="sub_cat_scroll" scroll-x="true" bindscroll="scroll" style="width: 100%">
-      <block wx:for="{{thirdCateList}}" wx:for-index="idx" wx:key="curIndex">
-        <block wx:if="{{idx==0}}">
-          <text class='sub_cate_inner current_cate scroll-view-item' bindtap="goToCategory" data-catid='{{item.sub_cate_id}}' data-cname='{{item.sub_cate_name}}'>{{item.sub_cate_name}}</text>
-        </block>
-        <block wx:else>
-          <text class='sub_cate_inner scroll-view-item' bindtap="goToCategory" data-catid='{{item.sub_cate_id}}' data-cname='{{item.sub_cate_name}}'>{{item.sub_cate_name}}</text>
-        </block>
-      </block>
 
+  <view class='sub_cate'>
+    <scroll-view scroll-x="true">
+      <view class="sub_cat_scroll">
+        <block wx:for="{{thirdCateList}}" wx:for-index="idx" wx:key="curIndex">
+            <text class="{{curThirdCate == item.sub_cate_id ?'marked_cate':'normal_cate'}}" bindtap="goToRequirements" data-catid='{{item.sub_cate_id}}' data-cname='{{item.sub_cate_name}}'>{{item.sub_cate_name}}</text>
+          
+        </block>
+      </view>
     </scroll-view>
   </view>
   <view class="rules">
-    <block wx:for="{{curCnt}}" wx:for-index="idx" wx:key="curIndex">
-      <view class='rules_wraaper'>
-        <view class='rules_single rules_keyword'>
-          <text class="rules_label">【关 键 词】</text>
-          <text class="rules_content">{{item.keyword}}</text>
-        </view>
-        <view class="rules_single">
-          <text class="rules_label">【安全要求】</text>
-          <text class="rules_content">{{item.requirements}}</text>
-        </view>
-        <view class="rules_single">
-          <text class="rules_label">【依据来源】</text>
-          <text class="rules_content">{{item.source}}</text>
-        </view>
-        <view class="rules_utils">
-          <view class="rules_utils_collect">
-            <image src="/image/collected-anti.png" class="rules_icon" mode="scaleToFill"></image>
-            <text class="rules_utils_label">({{item.collect}})</text>
-          </view>
-          <view class="rules_utils_agree">
-            <image src="/image/agree-anti.png" class="rules_icon" mode="scaleToFill"></image>
-            <text class="rules_utils_label">({{item.agree}})</text>
-          </view>
-        </view>
-      </view>
-    </block>
+    <template is="requirements" data="{{curRequirementsList}}"></template>
   </view>
 </view>

@@ -23,25 +23,33 @@
     <view bindtap="openNewPage" class="item" data-url="/pages/home/collect/collect" formType="submit" hoverClass="none">
       <view class="left_nav">
         <image class="tubiao" src="/image/wodeshoucang.png"></image>
-        <text>我的收藏</text>
-      </view>
-      <image class="more" src="/image/more.png"></image>
-    </view>
-    <view bindtap="openNewPage" class="item" data-url="/pages/user/mylist/mylist" formType="submit" hoverClass="none">
-      <view class="left_nav">
-        <image class="tubiao" src="/image/wodeqingdan.png"></image>
-        <text>我的清单</text>
-      </view>
-      <image class="more" src="/image/more.png"></image>
-    </view>
-    <view bindtap="openNewPage" class="item" data-url="/pages/home/history/history" formType="submit" hoverClass="none">
-      <view class="left_nav">
-        <image class="tubiao" src="/image/wokanguode.png"></image>
-        <text>我的浏览</text>
+        <text>「法律法规」收藏</text>
       </view>
       <image class="more" src="/image/more.png"></image>
     </view>
 
+    <view bindtap="openNewPage" class="item" data-url="/pages/home/history/history" formType="submit" hoverClass="none">
+      <view class="left_nav">
+        <image class="tubiao" src="/image/wokanguode.png"></image>
+        <text>「法律法规」浏览</text>
+      </view>
+      <image class="more" src="/image/more.png"></image>
+    </view>
+
+    <view bindtap="openNewPage" class="item" data-url="/pages/user/hcollection/hcollection" formType="submit" hoverClass="none">
+      <view class="left_nav">
+        <image class="tubiao" src="/image/wodeshoucang.png"></image>
+        <text>「隐患排查」收藏</text>
+      </view>
+      <image class="more" src="/image/more.png"></image>
+    </view>
+    <view bindtap="openNewPage" class="item" data-url="/pages/user/hagree/hagree" formType="submit" hoverClass="none">
+      <view class="left_nav">
+        <image class="tubiao" src="/image/agree-anti.png"></image>
+        <text>「隐患排查」点赞</text>
+      </view>
+      <image class="more" src="/image/more.png"></image>
+    </view>
   </view>
   <view class="nav_part">
     <view bindtap="openNewPage" class="item" data-url="/pages/user/about/about" formType="submit" hoverClass="none">

@@ -15,6 +15,7 @@ Page({
       url: api.api_list.get_category_api,
       method: 'GET',
       success: function(res) {
+        console.log(res.data);
         self.setData({
           cateItems: res.data
         })
@@ -75,6 +76,13 @@ Page({
       title: "安法苑，法律法规任您看!",
       path: path + '?userOpenId=' + openId,
       imageUrl: '/image/share.png',
+    }
+  },
+  //分享到朋友圈
+  onShareTimeline: function (res) {
+    return {
+      title: '安全生产法律法规，随你看！',
+      query: '我是带的参数'
     }
   }
 })
